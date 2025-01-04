@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PetPal</string>
+    <string name="app_name">Pet Pal</string>
+    <string name="phrase">Adopt. Care. Love.</string>
+    <string name="signin">Sign In</string>
 </resources>
