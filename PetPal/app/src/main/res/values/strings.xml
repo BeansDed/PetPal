@@ -2,4 +2,13 @@
     <string name="app_name">Pet Pal</string>
     <string name="phrase">Adopt. Care. Love.</string>
     <string name="signin">Sign In</string>
+    <string name="create_acc">Create an Account</string>
+    <string name="backBtn_desc"/>
+    <string name="welcomeBack">Welcome Back</string>
+    <string name="login">Login to your Account</string>
+    <string name="username_hint">   Username</string>
+    <string name="password_hint">   Password</string>
+    <string name="rememberMe_desc"/>
+    <string name="remember">Remember me</string>
+    <string name="forgot_pass">Forgot Password?</string>
 </resources>

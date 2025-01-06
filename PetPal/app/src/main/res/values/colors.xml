@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pure_black">#000000</color>
     <color name="smth_orange">#FF8D4C</color>
+    <color name="light_orange">#99FFBA69</color>
+    <color name="smth_gray">#99000000</color>
 </resources>

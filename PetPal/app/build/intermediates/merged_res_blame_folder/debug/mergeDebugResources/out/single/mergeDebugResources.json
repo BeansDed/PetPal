@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_logo2.png.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/logo2.png"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/font_alata.xml.flat",
+        "source": "com.example.petpal.app-main-34:/font/alata.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/xml_data_extraction_rules.xml.flat",
+        "source": "com.example.petpal.app-main-34:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/font_kumar_one.xml.flat",
+        "source": "com.example.petpal.app-main-34:/font/kumar_one.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/xml_backup_rules.xml.flat",
+        "source": "com.example.petpal.app-main-34:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/layout_activity_sign_in.xml.flat",
+        "source": "com.example.petpal.app-main-34:/layout/activity_sign_in.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/layout_activity_main.xml.flat",
+        "source": "com.example.petpal.app-main-34:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.example.petpal.app-main-34:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_rounded_corner.xml.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/rounded_corner.xml"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_logo1.png.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/logo1.png"
+    },
+    {
+        "merged": "com.example.petpal.app-debug-32:/drawable_back_btn.xml.flat",
+        "source": "com.example.petpal.app-main-34:/drawable/back_btn.xml"
+    }
+]
