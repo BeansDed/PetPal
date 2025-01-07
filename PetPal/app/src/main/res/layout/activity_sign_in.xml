@@ -50,33 +50,33 @@
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:fontFamily="@font/kumar_one"
-            android:textColor="@color/smth_orange"
+            android:textColor="@color/smth_gray"
             android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/username_input"
             android:layout_width="250dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/username_hint"
             android:autofillHints="username"
             android:inputType="text"
             android:fontFamily="@font/alata"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/pure_black"
             android:layout_marginTop="15dp"
             />
 
         <EditText
             android:id="@+id/password_input"
             android:layout_width="250dp"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:background="@drawable/rounded_corner"
             android:hint="@string/password_hint"
             android:inputType="textPassword"
             android:fontFamily="@font/alata"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/pure_black"
             android:layout_marginTop="15dp"
             />
     </LinearLayout>
@@ -92,14 +92,17 @@
         >
 
         <ImageView
+            android:id="@+id/remember_acc"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:src="@drawable/baseline_circle_24"
             android:contentDescription="@string/rememberMe_desc"
+            android:layout_marginTop="2dp"
             android:layout_marginEnd="210dp"
             />
 
         <TextView
+            android:id="@+id/remember_me"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/remember"
@@ -110,6 +113,7 @@
             />
 
         <TextView
+            android:id="@+id/forgot_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_pass"
@@ -119,15 +123,39 @@
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="450dp"
         android:layout_height="250dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:orientation="vertical"
         android:background="@drawable/logo2">
 
+        <Button
+            android:id="@+id/login"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_signin_btn"
+            android:fontFamily="@font/alata"
+            android:text="@string/signin"
+            android:textColor="@color/pure_black"
+            android:textSize="15sp"
+            android:layout_marginTop="50dp"/>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/signup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_sugg"
+            android:textSize="12sp"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/pure_black"
+
+            />
+
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

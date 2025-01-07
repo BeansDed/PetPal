@@ -3,12 +3,22 @@
     <string name="phrase">Adopt. Care. Love.</string>
     <string name="signin">Sign In</string>
     <string name="create_acc">Create an Account</string>
-    <string name="backBtn_desc"/>
+    <string name="backBtn_desc" />
     <string name="welcomeBack">Welcome Back</string>
     <string name="login">Login to your Account</string>
     <string name="username_hint">   Username</string>
     <string name="password_hint">   Password</string>
-    <string name="rememberMe_desc"/>
+    <string name="email">   Email</string>
+    <string name="rememberMe_desc" />
     <string name="remember">Remember me</string>
     <string name="forgot_pass">Forgot Password?</string>
+    <string name="signup_sugg">Don\'t have an Account? Sign Up</string>
+    <string name="register">Register</string>
+    <string name="acc_creation">Create your New Account</string>
+    <string name="login_btn">Login</string>
+    <string name="line_desc"/>
+    <string name="option_txt">Or continue with</string>
+    <string name="fblogo_desc"/>
+    <string name="googlelogo_desc"/>
+    <string name="already_acc">Already have an Account? Log in</string>"
 </resources>

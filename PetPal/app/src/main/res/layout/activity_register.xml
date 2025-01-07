@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        >
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/back_btn"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/backBtn_desc"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="110dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:fontFamily="@font/kumar_one"
+            android:textSize="40sp"
+            android:textColor="@color/smth_orange"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/acc_creation"
+            android:fontFamily="@font/kumar_one"
+            android:textColor="@color/smth_gray"
+            android:textSize="15sp"/>
+
+        <EditText
+            android:id="@+id/username_input"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/username_hint"
+            android:autofillHints="username"
+            android:inputType="text"
+            android:fontFamily="@font/alata"
+            android:textSize="15sp"
+            android:textColor="@color/pure_black"
+            android:layout_marginTop="30dp"
+            />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/alata"
+            android:textSize="15sp"
+            android:textColor="@color/pure_black"
+            android:layout_marginTop="17dp"
+            />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/password_hint"
+            android:inputType="textPassword"
+            android:fontFamily="@font/alata"
+            android:textSize="15sp"
+            android:textColor="@color/pure_black"
+            android:layout_marginTop="17dp"
+            />
+
+        <Button
+            android:id="@+id/login_btn"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custom_signin_btn"
+            android:fontFamily="@font/alata"
+            android:text="@string/login_btn"
+            android:textColor="@color/pure_black"
+            android:textSize="15sp"
+            android:layout_marginTop="30dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/remember_acc"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/baseline_circle_24"
+                android:contentDescription="@string/rememberMe_desc"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="230dp"
+                />
+
+            <TextView
+                android:id="@+id/remember_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember"
+                android:fontFamily="@font/alata"
+                android:textSize="10sp"
+                android:textColor="@color/smth_gray"
+                android:layout_marginStart="20dp"
+                />
+
+            <TextView
+                android:id="@+id/forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_pass"
+                android:textSize="10sp"
+                android:fontFamily="@font/alata"
+                android:layout_marginStart="170dp"/>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="start"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line1"
+                android:layout_marginTop="11dp"
+                android:contentDescription="@string/line_desc"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/option_txt"
+                android:textSize="12sp"
+                android:fontFamily="@font/alata"
+                android:textColor="@color/pure_black"
+                android:textAlignment="center"
+                android:layout_marginStart="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/line1"
+                android:layout_marginTop="11dp"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/line_desc"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="100dp">
+
+        <ImageView
+            android:id="@+id/fb_acc"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fb_logo"
+            android:contentDescription="@string/fblogo_desc"
+            android:layout_marginEnd="30dp"/>
+
+        <ImageView
+            android:id="@+id/google_acc"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/google_logo"
+            android:contentDescription="@string/googlelogo_desc"/>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="50dp">
+
+        <TextView
+            android:id="@+id/already_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/already_acc"
+            android:fontFamily="@font/alata"
+            android:textSize="10sp"
+            android:textColor="@color/pure_black"
+            android:textAlignment="center"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
