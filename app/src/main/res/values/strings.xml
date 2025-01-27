@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PetPal</string>
+    <string name="phrase">Adopt. Care. Love.</string>
+    <string name="skip">Skip</string>
+    <string name="welcomeBack">Welcome Back</string>
+    <string name="logintxt">Log in to your account</string>
+    <string name="remember">Remember me</string>
+    <string name="forgot">Forgot Password?</string>
+    <string name="signup_suggestion">Don\'t have an Account?</string>
+    <string name="register">Register</string>
+    <string name="create_Txt">Create your New Account</string>
+    <string name="login_suggestion">Already have and account?</string>
 </resources>

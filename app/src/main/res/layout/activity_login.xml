@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="450dp"
+            android:layout_height="200dp"
+            android:src="@drawable/topdesign1"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/topcat"
+            android:layout_marginTop="17dp"
+            android:layout_alignParentEnd="true"
+            />
+
+        <ImageView
+            android:layout_width="470dp"
+            android:layout_height="175dp"
+            android:src="@drawable/topdesign2"
+            android:layout_alignParentTop="true"/>
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/back_button"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcomeBack"
+            android:fontFamily="@font/kumar_one"
+            android:textSize="30sp"
+            android:textColor="@color/smth_orange"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logintxt"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="15sp"
+            android:textColor="@color/black"/>
+
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"/>
+
+        <EditText
+            android:id="@+id/username_input"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_input_roundedcorner"
+            android:hint="           Username"
+            android:fontFamily="@font/alata"
+            android:textSize="18sp"
+            android:lines="1"
+            android:maxLength="20"
+            android:inputType="text"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:background="@drawable/user_input_roundedcorner"
+            android:hint="           Password"
+            android:fontFamily="@font/alata"
+            android:textSize="18sp"
+            android:lines="1"
+            android:maxLength="20"
+            android:inputType="textPassword"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            />
+        
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"/>
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            
+            <ImageView
+                android:id="@+id/rememberMe"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/remember_btn"
+                android:background="@drawable/circle_button"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/rememberBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remember"
+                android:textSize="15sp"
+                android:layout_marginBottom="1dp"
+                android:fontFamily="@font/alata"/>
+
+
+            <Space
+                android:layout_width="45dp"
+                android:layout_height="wrap_content"/>
+            
+            <TextView
+                android:id="@+id/forgotBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot"
+                android:fontFamily="@font/alata"
+                android:textSize="15sp"/>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"/>
+
+        <ImageView
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/login"/>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+        <ImageView
+            android:layout_width="420dp"
+            android:layout_height="205dp"
+            android:src="@drawable/botdesign1"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/botcat"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="183dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/botdesign2"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signup_suggestion"
+            android:textSize="15sp"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/black"/>
+
+        <Space
+            android:layout_width="5dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/signup_suggestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textSize="15sp"
+            android:fontFamily="@font/alata"
+            android:textColor="@color/black"
+            />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
