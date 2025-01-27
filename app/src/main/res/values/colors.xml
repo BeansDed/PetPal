@@ -10,4 +10,9 @@
     <color name="lavender">#8692f7</color>
     <color name="orange">#FFD19B</color>
     <color name="gray">#757575</color>
+    <color name="smth_orange">#FF8D4C</color>
+    <color name="smth_black">#80000000</color>
+    <color name="light_orange">#80FFBA69</color>
+    <color name="blue">#0000FF</color>
+    <color name="red">#FF0000</color>
 </resources>
