@@ -1,62 +1,79 @@
 package com.example.petpal
 
 import android.os.Bundle
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var drawerLayout: DrawerLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login) // Ensure the layout filename matches here
+        setContentView(R.layout.catalog_activity) // Use catalog_activity.xml as the layout file
 
-        // Initialize views from the layout
-        val backBtn = findViewById<ImageView>(R.id.backBtn)
-        val usernameInput = findViewById<EditText>(R.id.username_input)
-        val passwordInput = findViewById<EditText>(R.id.password_input)
-        val rememberMeBtn = findViewById<ImageView>(R.id.rememberMe)
-        val forgotBtn = findViewById<TextView>(R.id.forgotBtn)
-        val loginBtn = findViewById<ImageView>(R.id.loginBtn)
-        val signUpSuggestion = findViewById<TextView>(R.id.signup_suggestion)
+        // Initialize the navigation drawer layout
+        drawerLayout = findViewById(R.id.drawer_layout)
 
-        // Back button click listener
-        backBtn.setOnClickListener {
-            Toast.makeText(this, "Back button clicked", Toast.LENGTH_SHORT).show()
-            // Handle back button logic (e.g., finish activity or go to a previous screen)
-            finish()
-        }
+        // Set up the toolbar
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        // Remember me button click listener
-        rememberMeBtn.setOnClickListener {
-            Toast.makeText(this, "Remember Me clicked", Toast.LENGTH_SHORT).show()
-            // Handle "Remember Me" functionality
-        }
+        // Set up the navigation view
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
 
-        // Forgot button click listener
-        forgotBtn.setOnClickListener {
-            Toast.makeText(this, "Forgot Password clicked", Toast.LENGTH_SHORT).show()
-            // Navigate to a "Forgot Password" screen or functionality
-        }
-
-        // Login button click listener
-        loginBtn.setOnClickListener {
-            val username = usernameInput.text.toString()
-            val password = passwordInput.text.toString()
-
-            if (username.isBlank() || password.isBlank()) {
-                Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
+        // Menu icon click listener to toggle the drawer
+        val menuIcon = findViewById<androidx.appcompat.widget.AppCompatImageView>(R.id.menuIcon)
+        menuIcon.setOnClickListener {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START)
             } else {
-                Toast.makeText(this, "Logging in with $username", Toast.LENGTH_SHORT).show()
-                // Handle login logic here (e.g., authentication)
+                drawerLayout.openDrawer(GravityCompat.START)
             }
         }
 
-        // Sign-up suggestion button click listener
-        signUpSuggestion.setOnClickListener {
-            Toast.makeText(this, "Sign-Up clicked", Toast.LENGTH_SHORT).show()
-            // Navigate to the Sign-Up activity or screen
+        // ActionBarDrawerToggle for handling the drawer state
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        // Display the HomeFragment by default
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment()).commit()
+            navigationView.setCheckedItem(R.id.nav_home)
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment()).commit()
+            R.id.nav_settings -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SettingsFragment()).commit()
+            R.id.nav_share -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, ShareFragment()).commit()
+            R.id.nav_about -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, AboutFragment()).commit()
+            R.id.nav_logout -> Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 }
