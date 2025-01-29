@@ -75,39 +75,54 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"/>
 
-        <EditText
-            android:id="@+id/username_input"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_container"
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:background="@drawable/user_input_roundedcorner"
-            android:hint="           Username"
-            android:fontFamily="@font/alata"
-            android:textSize="18sp"
-            android:lines="1"
-            android:maxLength="20"
-            android:inputType="text"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            />
+            android:layout_height="wrap_content"
+            app:helperText=""
+            app:helperTextTextColor="@color/red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username_input"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/user_input_roundedcorner"
+                android:hint="           Username"
+                android:fontFamily="@font/alata"
+                android:textSize="18sp"
+                android:lines="1"
+                android:maxLength="20"
+                android:inputType="text"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
 
-        <EditText
-            android:id="@+id/password_input"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_container"
             android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:background="@drawable/user_input_roundedcorner"
-            android:hint="           Password"
-            android:fontFamily="@font/alata"
-            android:textSize="18sp"
-            android:lines="1"
-            android:maxLength="20"
-            android:inputType="textPassword"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            />
+            android:layout_height="wrap_content"
+            app:helperText=""
+            app:helperTextTextColor="@color/red">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_input"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:background="@drawable/user_input_roundedcorner"
+                android:hint="           Password"
+                android:fontFamily="@font/alata"
+                android:textSize="18sp"
+                android:lines="1"
+                android:maxLength="16"
+                android:inputType="text"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
