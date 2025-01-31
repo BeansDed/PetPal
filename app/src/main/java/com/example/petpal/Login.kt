@@ -22,6 +22,9 @@ class Login : AppCompatActivity() {
     private lateinit var loginBtn : ImageView
     private lateinit var signup_suggestion : TextView
 
+    private lateinit var username_container : com.google.android.material.textfield.TextInputLayout
+    private lateinit var password_container : com.google.android.material.textfield.TextInputLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -41,6 +44,9 @@ class Login : AppCompatActivity() {
         loginBtn = findViewById(R.id.loginBtn)
         signup_suggestion = findViewById(R.id.signup_suggestion)
 
+        username_container = findViewById(R.id.username_container)
+        password_container = findViewById(R.id.password_container)
+
         signup_suggestion.paintFlags = signup_suggestion.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
         signup_suggestion.setTextColor(getColor(R.color.blue))
 
@@ -49,10 +55,45 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
 
+        loginBtn.setOnClickListener{
+            val intent = Intent(this, CatalogActivity::class.java)
+            startActivity(intent)
+        }
+
         signup_suggestion.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
             startActivity(intent)
         }
 
+        fun setupFocusListeners() {
+            username_input.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) validateUsername()
+            }
+
+            password_input.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) validatePassword()
+            }
+        }
+
+        setupFocusListeners()
+
+    }
+
+    fun validateUsername() {
+        val username = username_input.text.toString().trim()
+        if (username.isBlank()) {
+            username_container.error = "Please input a Username"
+        } else {
+            username_container.error = null
+        }
+    }
+
+    fun validatePassword() {
+        val password = password_input.text.toString().trim()
+        if (password.isBlank()) {
+            password_container.error = "Please input a Password"
+        } else {
+            password_container.error = null
+        }
     }
 }

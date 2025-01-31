@@ -1,197 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity"
-    tools:openDrawer="start">
-
-    <!-- Main Content -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:elevation="4dp"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/menuIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="start|center_vertical" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/searchIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/search" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/cartIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="56dp"
-                android:src="@drawable/cart" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <!-- Promotional Banner ViewPager -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/bannerViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="@color/orange"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-
-        <!-- Category Scrolling Container -->
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/dotIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="5dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bannerViewPager"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp" />
-
-        <HorizontalScrollView
-            android:id="@+id/categoryScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/dotIndicator">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingHorizontal="17dp"
-                android:layout_marginBottom="30dp">
-
-                <!-- Category Buttons -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="All"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/orange"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryFood"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Food"
-                    android:textColor="@color/gray"
-                    android:backgroundTint="#F5F5F5"
-                    app:cornerRadius="20dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryToys"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Toys"
-                    android:textColor="@color/gray"
-                    android:backgroundTint="#F5F5F5"
-                    app:cornerRadius="20dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryAccessories"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Accessories"
-                    android:textColor="@color/gray"
-                    android:backgroundTint="#F5F5F5"
-                    app:cornerRadius="20dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryGrooming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Grooming"
-                    android:textColor="@color/gray"
-                    android:backgroundTint="#F5F5F5"
-                    app:cornerRadius="20dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryHealth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="Health"
-                    android:textColor="@color/gray"
-                    android:backgroundTint="#F5F5F5"
-                    app:cornerRadius="20dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <!-- Product Grid -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/productsRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-            app:layout_constraintTop_toBottomOf="@id/categoryScrollView" />
-
-        <!-- Fragment Container -->
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragment_container"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="@id/productsRecyclerView"
-            app:layout_constraintBottom_toBottomOf="@id/productsRecyclerView" />
-
-        <!-- Bottom Navigation -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:menu="@menu/bottom_nav_menu"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- Navigation View -->
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        android:background="@color/white"
-        app:itemIconTint="@color/orange"
-        app:itemTextColor="@color/orange" />
-</androidx.drawerlayout.widget.DrawerLayout>
+        android:fitsSystemWindows="true"
+        tools:context=".MainActivity"
+        tools:openDrawer="start">
+
+        <!-- Main Content -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Toolbar -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:elevation="4dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/menuIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="start|center_vertical" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/search" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/cartIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="56dp"
+                    android:src="@drawable/cart" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <!-- Promotional Banner ViewPager -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/bannerViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/orange"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
+            <!-- Category Scrolling Container -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/dotIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bannerViewPager"
+                app:tabGravity="center"
+                app:tabIndicatorHeight="0dp" />
+
+            <HorizontalScrollView
+                android:id="@+id/categoryScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="140dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/dotIndicator"
+                tools:layout_editor_absoluteX="-183dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="17dp">
+
+                    <!-- Category Buttons -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="@color/orange"
+                        android:text="All"
+                        android:textColor="@color/white"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryFood"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#F5F5F5"
+                        android:text="Food"
+                        android:textColor="@color/gray"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryToys"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#F5F5F5"
+                        android:text="Toys"
+                        android:textColor="@color/gray"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryAccessories"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#F5F5F5"
+                        android:text="Accessories"
+                        android:textColor="@color/gray"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryGrooming"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#F5F5F5"
+                        android:text="Grooming"
+                        android:textColor="@color/gray"
+                        app:cornerRadius="20dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/categoryHealth"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="8dp"
+                        android:backgroundTint="#F5F5F5"
+                        android:text="Health"
+                        android:textColor="@color/gray"
+                        app:cornerRadius="20dp" />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Product Grid -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/productsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
+                app:layout_constraintTop_toBottomOf="@id/categoryScrollView" />
+
+            <!-- Fragment Container -->
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/productsRecyclerView"
+                app:layout_constraintBottom_toBottomOf="@id/productsRecyclerView" />
+
+            <!-- Bottom Navigation -->
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:menu="@menu/bottom_nav_menu"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Navigation View -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            app:menu="@menu/nav_menu"
+            android:background="@color/white"
+            app:itemIconTint="@color/smth_orange"
+            app:itemTextColor="@color/smth_orange" />
+    </androidx.drawerlayout.widget.DrawerLayout>
