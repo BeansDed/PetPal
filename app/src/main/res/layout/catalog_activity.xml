@@ -13,8 +13,7 @@
         <!-- Main Content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="match_parent">
 
             <!-- Toolbar -->
             <androidx.appcompat.widget.Toolbar
@@ -29,7 +28,9 @@
                     android:id="@+id/menuIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_gravity="start|center_vertical" />
+                    android:layout_gravity="start|center_vertical"
+                    android:src="@drawable/menu_bar" />  <!-- Make sure this drawable exists and is visible -->
+
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/searchIcon"
@@ -37,14 +38,15 @@
                     android:layout_height="24dp"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/search" />
+                    android:src="@drawable/search"
+                    android:onClick="goToSearchActivity"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/cartIcon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="end|center_vertical"
-                    android:layout_marginEnd="56dp"
+                    android:layout_marginEnd="10dp"
                     android:src="@drawable/cart" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -76,7 +78,7 @@
                 android:id="@+id/categoryScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="10dp"
                 android:scrollbars="none"
                 app:layout_constraintTop_toBottomOf="@id/dotIndicator"
                 tools:layout_editor_absoluteX="-183dp">
@@ -96,7 +98,7 @@
                         android:layout_marginEnd="8dp"
                         android:backgroundTint="@color/orange"
                         android:text="All"
-                        android:textColor="@color/white"
+                        android:textColor="@color/gray"
                         app:cornerRadius="20dp" />
 
                     <com.google.android.material.button.MaterialButton

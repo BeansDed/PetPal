@@ -1,8 +1,12 @@
 package com.example.petpal
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,88 +16,102 @@ import com.google.android.material.tabs.TabLayout
 
 class CatalogActivity : AppCompatActivity() {
 
-    class CatalogActivity : AppCompatActivity() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.catalog_activity)
+    private lateinit var categoryAll: MaterialButton
+    private lateinit var categoryFood: MaterialButton
+    private lateinit var categoryToys: MaterialButton
+    private lateinit var categoryAccessories: MaterialButton
+    private lateinit var categoryGrooming: MaterialButton
+    private lateinit var categoryHealth: MaterialButton
+    private lateinit var searchIcon: ImageView
 
-            // Initialize views
-            val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
-            val navigationView = findViewById<NavigationView>(R.id.nav_view)
-            val categoryAll = findViewById<MaterialButton>(R.id.categoryAll)
-            val categoryFood = findViewById<MaterialButton>(R.id.categoryFood)
-            val categoryToys = findViewById<MaterialButton>(R.id.categoryToys)
-            val categoryAccessories = findViewById<MaterialButton>(R.id.categoryAccessories)
-            val categoryGrooming = findViewById<MaterialButton>(R.id.categoryGrooming)
-            val categoryHealth = findViewById<MaterialButton>(R.id.categoryHealth)
-            val productsRecyclerView = findViewById<RecyclerView>(R.id.productsRecyclerView)
-            val tabLayout = findViewById<TabLayout>(R.id.dotIndicator)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.catalog_activity)
 
-            // Setup RecyclerView for products
-            productsRecyclerView.layoutManager = GridLayoutManager(this, 2) // Grid with 2 columns
-            productsRecyclerView.adapter = CatalogAdapter(getCatalogItems())
+        initializeViews()
+        setupCategoryButtons()
+        setupNavigationDrawer()
+    }
 
-            // Handle category button clicks
-            categoryAll.setOnClickListener {
-                Toast.makeText(this, "All category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "All"
+    private fun initializeViews() {
+        val drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        val productsRecyclerView = findViewById<RecyclerView>(R.id.productsRecyclerView)
+        val menuIcon = findViewById<ImageView>(R.id.menuIcon)
+
+        categoryAll = findViewById(R.id.categoryAll)
+        categoryFood = findViewById(R.id.categoryFood)
+        categoryToys = findViewById(R.id.categoryToys)
+        categoryAccessories = findViewById(R.id.categoryAccessories)
+        categoryGrooming = findViewById(R.id.categoryGrooming)
+        categoryHealth = findViewById(R.id.categoryHealth)
+
+        productsRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        productsRecyclerView.adapter = CatalogAdapter(getCatalogItems())
+
+        menuIcon.setOnClickListener { drawerLayout.openDrawer(Gravity.LEFT) }
+
+        searchIcon = findViewById(R.id.searchIcon)
+        searchIcon.setOnClickListener { goToSearchActivity() }
+    }
+
+    private fun goToSearchActivity() {
+        val intent = Intent(this, SearchActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun setupCategoryButtons() {
+        val buttons = listOf(categoryAll, categoryFood, categoryToys, categoryAccessories, categoryGrooming, categoryHealth)
+        buttons.forEach { button ->
+            button.setOnClickListener {
+                setActiveButton(it as MaterialButton)
             }
+        }
+    }
 
-            categoryFood.setOnClickListener {
-                Toast.makeText(this, "Food category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "Food"
-            }
+    private fun setActiveButton(activeButton: MaterialButton) {
+        val buttons = listOf(categoryAll, categoryFood, categoryToys, categoryAccessories, categoryGrooming, categoryHealth)
+        buttons.forEach {
+            it.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
+        }
+        activeButton.setBackgroundColor(ContextCompat.getColor(this, R.color.orange))
+    }
 
-            categoryToys.setOnClickListener {
-                Toast.makeText(this, "Toys category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "Toys"
-            }
-
-            categoryAccessories.setOnClickListener {
-                Toast.makeText(this, "Accessories category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "Accessories"
-            }
-
-            categoryGrooming.setOnClickListener {
-                Toast.makeText(this, "Grooming category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "Grooming"
-            }
-
-            categoryHealth.setOnClickListener {
-                Toast.makeText(this, "Health category selected", Toast.LENGTH_SHORT).show()
-                // Filter products or perform actions for "Health"
-            }
-
-            // Handle navigation drawer item clicks
-            navigationView.setNavigationItemSelectedListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.nav_home -> {
-                        Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    //R.id.nav_profile -> {
-                    //Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
-                    //true
-                    //}
-                    R.id.nav_settings -> {
-                        Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-
-                    R.id.nav_logout -> {
-                        Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-
-                    else -> false
+    private fun setupNavigationDrawer() {
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> {
+                    Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show()
+                    true
                 }
+                R.id.nav_settings -> {
+                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.nav_logout -> {
+                    logout()  // Call the logout function here
+                    true
+                }
+                else -> false
             }
         }
+    }
 
-        // Mock data
-        private fun getCatalogItems(): List<CatalogItem> {
-            return listOf(
-                // Add more items...
-            )
-        }
-    }}
+    private fun logout() {
+        // Clear user data (SharedPreferences or any other storage)
+        val sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+        // Redirect to the LoginActivity
+        val intent = Intent(this, Login::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+    }
+
+    private fun getCatalogItems(): List<CatalogItem> {
+        return listOf(
+            // Populate with actual catalog items
+        )
+    }
+}

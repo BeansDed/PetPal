@@ -39,7 +39,7 @@ class Welcome : AppCompatActivity() {
             startActivity(intent)
         }
 
-        skipBtn.setOnClickListener{
+        skipBtn.setOnClickListener {
             val intent = Intent(this, CatalogActivity::class.java)
             startActivity(intent)
         }

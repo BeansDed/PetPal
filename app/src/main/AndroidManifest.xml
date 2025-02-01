@@ -12,36 +12,35 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.PetPal"
         tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MainActivity">
+            <!-- MainActivity is set to exported as it is accessed externally -->
+        </activity>
+        <activity
+            android:name=".CatalogActivity"
+            android:exported="true">
+            <!-- CatalogActivity is also exported for navigation -->
+        </activity>
         <activity
             android:name=".SignUp"
-            android:exported="false" />
+            android:exported="false">
+            <!-- SignUp not exported as it does not need to be accessible externally -->
+        </activity>
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="false">
+            <!-- Login activity is kept internal -->
+        </activity>
         <activity
             android:name=".Welcome"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MainActivity">
-
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-
-        <activity
-            android:name=".CatalogActivity"
-            android:exported="true"/>
-
     </application>
-
 </manifest>
