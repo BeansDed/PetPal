@@ -2,6 +2,7 @@ package com.example.petpal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -57,6 +58,7 @@ class Login : AppCompatActivity() {
 
         loginBtn.setOnClickListener{
             val intent = Intent(this, CatalogActivity::class.java)
+            Log.e("Login", "Login button clicked")
             startActivity(intent)
         }
 
