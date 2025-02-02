@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class CatalogAdapter(private val catalogItems: List<CatalogItem>) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
@@ -27,10 +28,24 @@ class CatalogAdapter(private val catalogItems: List<CatalogItem>) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = catalogItems[position]
-        holder.productImage.setImageResource(item.imageResId)
+
+        // Load product image using Glide
+        Glide.with(holder.itemView.context)
+            .load(item.imageUrl)
+            //.placeholder(R.drawable.placeholder_image)  // Optional: placeholder while loading
+            //.error(R.drawable.error_image)             // Optional: error image if loading fails
+            .into(holder.productImage)
+
+        // Set product details
         holder.productName.text = item.name
         holder.productDescription.text = item.description
-        //holder.productPrice.text = item.price
+        holder.productPrice.text = "₱${item.price}"
+
+        // Add click listener for the "Add to Cart" button
+        holder.addToCartButton.setOnClickListener {
+            Toast.makeText(holder.itemView.context, "${item.name} added to cart", Toast.LENGTH_SHORT).show()
+            // TODO: Implement actual cart functionality here
+        }
     }
 
     override fun getItemCount(): Int = catalogItems.size

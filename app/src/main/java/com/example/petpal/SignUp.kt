@@ -6,33 +6,38 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputLayout
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 
 class SignUp : AppCompatActivity() {
 
     private lateinit var backBtn: ImageView
-    private lateinit var username_input: EditText
-    private lateinit var email_input: EditText
-    private lateinit var password_input: EditText
-    private lateinit var signin_btn: ImageView
-    private lateinit var rememberBtn: ImageView
-    private lateinit var rememberMe: TextView
-    private lateinit var forgotBtn: TextView
-    private lateinit var googleBtn: ImageView
-    private lateinit var login_sugg: TextView
+    private lateinit var usernameInput: EditText
+    private lateinit var emailInput: EditText
+    private lateinit var passwordInput: EditText
+    private lateinit var signupBtn: ImageView
+    private lateinit var loginSugg: TextView
 
-    private lateinit var username_container: TextInputLayout
-    private lateinit var email_container: TextInputLayout
-    private lateinit var password_container: TextInputLayout
+    private lateinit var usernameContainer: TextInputLayout
+    private lateinit var emailContainer: TextInputLayout
+    private lateinit var passwordContainer: TextInputLayout
+
+    private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -46,88 +51,82 @@ class SignUp : AppCompatActivity() {
 
     private fun initViews() {
         backBtn = findViewById(R.id.backBtn)
-        username_input = findViewById(R.id.username_input)
-        email_input = findViewById(R.id.email_input)
-        password_input = findViewById(R.id.password_input)
-        signin_btn = findViewById(R.id.signin_btn)
-        rememberBtn = findViewById(R.id.rememberBtn)
-        rememberMe = findViewById(R.id.rememberMe)
-        forgotBtn = findViewById(R.id.forgotBtn)
-        googleBtn = findViewById(R.id.googleBtn)
-        login_sugg = findViewById(R.id.login_sugg)
+        usernameInput = findViewById(R.id.username_input)
+        emailInput = findViewById(R.id.email_input)
+        passwordInput = findViewById(R.id.password_input)
+        signupBtn = findViewById(R.id.signin_btn)
+        loginSugg = findViewById(R.id.login_sugg)
 
-        username_container = findViewById(R.id.username_container)
-        email_container = findViewById(R.id.email_container)
-        password_container = findViewById(R.id.password_container)
+        usernameContainer = findViewById(R.id.username_container)
+        emailContainer = findViewById(R.id.email_container)
+        passwordContainer = findViewById(R.id.password_container)
 
-        login_sugg.paintFlags = login_sugg.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        login_sugg.setTextColor(getColor(R.color.smth_black))
+        loginSugg.paintFlags = loginSugg.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
+        loginSugg.setTextColor(getColor(R.color.smth_black))
     }
 
     private fun setupButtonListeners() {
         backBtn.setOnClickListener {
             finish()  // Go back to the previous activity
         }
-        signin_btn.setOnClickListener {
+        signupBtn.setOnClickListener {
             if (validateInputs()) {
-                val intent = Intent(this, CatalogActivity::class.java)
-                startActivity(intent)
+                performRegistration()
             }
         }
-        login_sugg.setOnClickListener {
+        loginSugg.setOnClickListener {
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
     }
 
     private fun setupFocusListeners() {
-        username_input.setOnFocusChangeListener { _, hasFocus ->
+        usernameInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) validateUsername()
         }
-        email_input.setOnFocusChangeListener { _, hasFocus ->
+        emailInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) validateEmail()
         }
-        password_input.setOnFocusChangeListener { _, hasFocus ->
+        passwordInput.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) validatePassword()
         }
     }
 
     private fun validateUsername(): Boolean {
-        val username = username_input.text.toString().trim()
+        val username = usernameInput.text.toString().trim()
         return if (username.isEmpty()) {
-            username_container.error = "Username is required"
+            usernameContainer.error = "Username is required"
             false
         } else {
-            username_container.error = null
+            usernameContainer.error = null
             true
         }
     }
 
     private fun validateEmail(): Boolean {
-        val email = email_input.text.toString().trim()
-        Log.d("SignUpActivity", "Validating email: $email") // Debugging output
+        val email = emailInput.text.toString().trim()
         return if (email.isEmpty()) {
-            email_container.error = "Email is required"
+            emailContainer.error = "Email is required"
             false
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            email_container.error = "Enter a valid email"
+            emailContainer.error = "Enter a valid email"
             false
         } else {
-            email_container.error = null
+            emailContainer.error = null
             true
         }
     }
 
     private fun validatePassword(): Boolean {
-        val password = password_input.text.toString().trim()
+        val password = passwordInput.text.toString().trim()
         return if (password.isEmpty()) {
-            password_container.error = "Password is required"
+            passwordContainer.error = "Password is required"
             false
-        } else if (password.length < 8) {  // Assuming a minimum of 8 characters for the password
-            password_container.error = "Password must be at least 8 characters"
+        } else if (password.length < 8) {
+            passwordContainer.error = "Password must be at least 8 characters"
             false
         } else {
-            password_container.error = null
+            passwordContainer.error = null
             true
         }
     }
@@ -137,5 +136,56 @@ class SignUp : AppCompatActivity() {
         val isEmailValid = validateEmail()
         val isPasswordValid = validatePassword()
         return isUsernameValid && isEmailValid && isPasswordValid
+    }
+
+    private fun performRegistration() {
+        val username = usernameInput.text.toString().trim()
+        val email = emailInput.text.toString().trim()
+        val password = passwordInput.text.toString().trim()
+
+        val jsonObject = JSONObject().apply {
+            put("username", username)
+            put("email", email)
+            put("password", password)
+        }
+
+        val mediaType = "application/json; charset=utf-8".toMediaType()
+        val requestBody = jsonObject.toString().toRequestBody(mediaType)
+
+        val request = Request.Builder()
+            .url("http://192.168.1.12/backend/mobile_register.php")  // Change this to your actual endpoint
+            .post(requestBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("SignUp", "Registration failed", e)
+                runOnUiThread {
+                    Toast.makeText(this@SignUp, "Registration failed: ${e.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                try {
+                    val responseData = response.body?.string()
+                    val jsonResponse = JSONObject(responseData)
+
+                    runOnUiThread {
+                        if (jsonResponse.optBoolean("success", false)) {
+                            Toast.makeText(this@SignUp, "Registration successful! Please log in.", Toast.LENGTH_LONG).show()
+                            startActivity(Intent(this@SignUp, Login::class.java))
+                            finish()
+                        } else {
+                            Toast.makeText(this@SignUp, jsonResponse.optString("message", "Registration failed"), Toast.LENGTH_LONG).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("SignUp", "Error processing response", e)
+                    runOnUiThread {
+                        Toast.makeText(this@SignUp, "Error processing response: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+        })
     }
 }

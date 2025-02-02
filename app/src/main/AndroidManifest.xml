@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.petpal">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,29 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.PetPal"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true">
 
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.MainActivity">
-            <!-- MainActivity is set to exported as it is accessed externally -->
-        </activity>
-        <activity
-            android:name=".CatalogActivity"
-            android:exported="true">
-            <!-- CatalogActivity is also exported for navigation -->
-        </activity>
-        <activity
-            android:name=".SignUp"
-            android:exported="false">
-            <!-- SignUp not exported as it does not need to be accessible externally -->
-        </activity>
-        <activity
-            android:name=".Login"
-            android:exported="false">
-            <!-- Login activity is kept internal -->
-        </activity>
+        <!-- Main Activity with launcher intent -->
         <activity
             android:name=".Welcome"
             android:exported="true">
@@ -42,5 +26,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Other Activities -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.MainActivity" />
+
+        <activity
+            android:name=".CatalogActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".SignUp"
+            android:exported="false" />
+
+        <activity
+            android:name=".Login"
+            android:exported="false" />
     </application>
 </manifest>

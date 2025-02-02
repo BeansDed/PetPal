@@ -30,11 +30,14 @@ class ProductAdapter(private val productList: List<CatalogItem>) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = productList[position]
 
+        // Load product image (use an image loading library like Glide or Picasso)
+        // Example with Glide (uncomment if Glide is added to your project):
+        // Glide.with(holder.itemView.context).load(product.imageUrl).into(holder.productImage)
+
         // Bind product data to views
-        holder.productImage.setImageResource(product.imageResId)
         holder.productName.text = product.name
         holder.productDescription.text = product.description
-        //holder.productPrice.text = product.price
+        holder.productPrice.text = "₱${product.price}"
 
         // Set up listeners for buttons
         holder.thumbsUpButton.setOnClickListener {
