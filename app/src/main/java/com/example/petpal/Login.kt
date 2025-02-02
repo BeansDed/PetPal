@@ -11,10 +11,6 @@ import androidx.core.graphics.blue
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-fun loginAccs() {
-    val login_username = String
-    val login_password = String
-}
 
 class Login : AppCompatActivity() {
 
