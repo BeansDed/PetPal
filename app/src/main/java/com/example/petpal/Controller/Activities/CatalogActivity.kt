@@ -94,7 +94,7 @@ class CatalogActivity : AppCompatActivity() {
         buttons.forEach {
             it.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
         }
-        activeButton.setBackgroundColor(ContextCompat.getColor(this, R.color.orange))
+        activeButton.setBackgroundColor(ContextCompat.getColor(this, R.color.smth_orange))
     }
 
     private fun setupNavigationDrawer() {

@@ -39,7 +39,7 @@
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/search"
-                    android:onClick="goToSearchActivity"/>
+                    />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/cartIcon"
@@ -54,7 +54,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/bannerViewPager"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="150dp"
                 android:background="@color/orange"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
@@ -96,7 +96,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginEnd="8dp"
-                        android:backgroundTint="@color/orange"
+                        android:backgroundTint="@color/smth_orange"
                         android:text="All"
                         android:textColor="@color/gray"
                         app:cornerRadius="20dp" />

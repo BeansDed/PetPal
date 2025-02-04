@@ -3,6 +3,7 @@ package com.example.petpal
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.petpal.Controller.Service
 import com.example.petpal.databinding.ActivityServiceDetailBinding  // Import correct binding class
 
 class ServiceDetailActivity : AppCompatActivity() {

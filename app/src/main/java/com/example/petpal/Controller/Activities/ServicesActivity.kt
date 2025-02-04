@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.petpal.Controller.Service
 import com.example.petpal.databinding.ActivityServicesBinding
 
 class ServicesActivity : AppCompatActivity() {

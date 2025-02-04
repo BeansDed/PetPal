@@ -1,4 +1,4 @@
-package com.example.petpal
+package com.example.petpal.Controller
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
