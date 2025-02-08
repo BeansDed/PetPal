@@ -7,6 +7,8 @@ import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -16,10 +18,12 @@ import java.io.IOException
 class Login : AppCompatActivity() {
 
     private lateinit var backBtn: ImageView
-    private lateinit var usernameInput: EditText
-    private lateinit var passwordInput: EditText
+    private lateinit var usernameInput: TextInputEditText
+    private lateinit var passwordInput: TextInputEditText
     private lateinit var loginBtn: ImageView
     private lateinit var signupSuggestion: TextView
+    private lateinit var username_container : TextInputLayout
+    private lateinit var password_container : TextInputLayout
     private lateinit var sharedPreferences: SharedPreferences
     private val client = OkHttpClient()
 
@@ -47,6 +51,8 @@ class Login : AppCompatActivity() {
         passwordInput = findViewById(R.id.password_input)
         loginBtn = findViewById(R.id.loginBtn)
         signupSuggestion = findViewById(R.id.signup_suggestion)
+        username_container = findViewById(R.id.username_container)
+        password_container = findViewById(R.id.password_container)
 
         // Set up click listeners
         backBtn.setOnClickListener {
@@ -58,7 +64,9 @@ class Login : AppCompatActivity() {
             val password = passwordInput.text.toString().trim()
 
             if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                username_container.error = "Please input your username"
+                password_container.error = "Please input your password"
+                startActivity(Intent(this, CatalogActivity::class.java))
             } else {
                 performLogin(username, password)
             }
