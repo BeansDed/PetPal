@@ -7,55 +7,138 @@
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
+    <!-- IDs
 
+    @backBtn
+    @username_container
+    @username_input
+    @email_container
+    @email_input
+    @password_container
+    @password_input
+    @confirmpass_container
+    @confirmpass_input
+    @acceptTerms
+    @terms
+    @privacyPolicy
+    @signin_btn
+    @login_sugg
+
+    -->
+
+    <!-- Top Design -->
     <RelativeLayout
+        android:id="@+id/topDesign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:gravity="top|center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/topdesign1"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/design_desc"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/topcat"
+            android:contentDescription="@string/design_desc"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="175dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/topdesign2"
+            android:contentDescription="@string/design_desc"/>
 
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
-            android:src="@drawable/back_button"/>
+            android:layout_marginTop="30dp"
+            android:src="@drawable/back_button"
+            android:contentDescription="@string/back_buttonDesc" />
+
     </RelativeLayout>
 
-    <LinearLayout
+    <!-- Bottom Design -->
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="205dp"
+            android:src="@drawable/botdesign1"
+            android:contentDescription="@string/design_desc" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_alignParentStart="true"
+            android:src="@drawable/botcat"
+            android:contentDescription="@string/design_desc" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="183dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/botdesign2"
+            android:contentDescription="@string/design_desc" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <!-- Title View -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/kumar_one"
             android:text="@string/register"
-            android:fontFamily="@font/kumar_one"
-            android:textSize="35sp"
             android:textColor="@color/smth_orange"
-            />
+            android:textSize="35sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create_Txt"
             android:fontFamily="@font/kumar_one"
-            android:textSize="15sp"
+            android:text="@string/create_Txt"
             android:textColor="@color/smth_black"
-            />
+            android:textSize="15sp" />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="40dp"/>
+            android:layout_height="40dp" />
 
-        <!--Username Input-->
+        <!--Username Container-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_container"
             android:layout_width="300dp"
@@ -63,26 +146,27 @@
             app:helperText=""
             app:helperTextTextColor="@color/red">
 
+            <!-- Username Input -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_input"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:background="@drawable/user_input_roundedcorner"
-                android:hint="   Username"
                 android:fontFamily="@font/alata"
-                android:textSize="18sp"
+                android:hint=" Username"
+                android:inputType="text"
                 android:lines="1"
                 android:maxLength="20"
-                android:inputType="text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
 
-        <!--Email Input-->
+        <!--Email Container-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_container"
             android:layout_width="300dp"
@@ -90,26 +174,27 @@
             app:helperText=""
             app:helperTextTextColor="@color/red">
 
+            <!-- Email Input -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email_input"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:background="@drawable/user_input_roundedcorner"
-                android:hint="   Email"
                 android:fontFamily="@font/alata"
-                android:textSize="18sp"
+                android:hint=" Email"
+                android:inputType="text"
                 android:lines="1"
                 android:maxLength="50"
-                android:inputType="text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
 
-        <!--Password Input-->
+        <!--Password Container-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_container"
             android:layout_width="300dp"
@@ -117,158 +202,132 @@
             app:helperText=""
             app:helperTextTextColor="@color/red">
 
+            <!-- Password Input -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_input"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:background="@drawable/user_input_roundedcorner"
-                android:hint="   Password"
                 android:fontFamily="@font/alata"
-                android:textSize="18sp"
+                android:hint=" Password"
+                android:inputType="text"
                 android:lines="1"
                 android:maxLength="16"
-                android:inputType="text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
+            android:layout_height="20dp" />
 
-        <ImageView
-            android:id="@+id/signin_btn"
-            android:layout_width="wrap_content"
+        <!-- Confirm Password Container -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmpass_container"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/signin_btn"/>
+            app:helperText=""
+            app:helperTextTextColor="@color/red">
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"/>
+            <!-- Confirm Password Input -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirmpass_input"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:background="@drawable/user_input_roundedcorner"
+                android:fontFamily="@font/alata"
+                android:hint=" Confirm Password"
+                android:inputType="text"
+                android:lines="1"
+                android:maxLength="16"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Terms and Conditions CheckBox -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/rememberBtn"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/remember_btn"
-                android:background="@drawable/circle_button"/>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/rememberMe"
+            <CheckBox
+                android:id="@+id/acceptTerms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/remember"
-                android:textSize="15sp"
-                android:layout_marginBottom="1dp"
-                android:fontFamily="@font/alata"/>
-
-
-            <Space
-                android:layout_width="45dp"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/forgotBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/forgot"
                 android:fontFamily="@font/alata"
-                android:textSize="15sp"/>
+                android:text="I accept "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="Terms and Conditions "
+                android:textColor="@color/smth_orange"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="and "
+                android:textColor="@color/smth_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/privacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="Privacy Policy"
+                android:textColor="@color/smth_orange"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
+        <!-- Sign in Button -->
+        <ImageView
+            android:id="@+id/signin_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/signin_btn"
+            android:contentDescription="@string/button_desc" />
+
+
+        <!-- Login Suggestion -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="25dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/line"/>
-
-            <Space
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"/>
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Or Continue With"
-                android:textSize="15sp"
                 android:fontFamily="@font/alata"
-                android:textColor="@color/black"/>
+                android:text="@string/login_suggestion"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
             <Space
-                android:layout_width="20dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="5dp"
+                android:layout_height="wrap_content" />
 
-            <ImageView
+            <TextView
+                android:id="@+id/login_sugg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/line"/>
-
+                android:fontFamily="@font/alata"
+                android:text="Log In"
+                android:textColor="@color/smth_orange"
+                android:textSize="15sp" />
         </LinearLayout>
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"/>
-
-        <ImageView
-            android:id="@+id/googleBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/google"
-            android:background="@drawable/circle_button"/>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_suggestion"
-            android:textSize="15sp"
-            android:fontFamily="@font/alata"
-            android:textColor="@color/smth_black"/>
-
-        <Space
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/login_sugg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log In"
-            android:textSize="15sp"
-            android:fontFamily="@font/alata"
-            android:textColor="@color/smth_black"
-            />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

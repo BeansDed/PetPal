@@ -3,6 +3,7 @@ package com.example.petpal
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -21,15 +23,27 @@ import java.io.IOException
 class SignUp : AppCompatActivity() {
 
     private lateinit var backBtn: ImageView
-    private lateinit var usernameInput: EditText
-    private lateinit var emailInput: EditText
-    private lateinit var passwordInput: EditText
-    private lateinit var signupBtn: ImageView
-    private lateinit var loginSugg: TextView
 
+    // TextField Containers
     private lateinit var usernameContainer: TextInputLayout
     private lateinit var emailContainer: TextInputLayout
     private lateinit var passwordContainer: TextInputLayout
+    private lateinit var confirmpass_container: TextInputLayout
+
+    // TextField Inputs
+    private lateinit var usernameInput: TextInputEditText
+    private lateinit var emailInput: TextInputEditText
+    private lateinit var passwordInput: TextInputEditText
+    private lateinit var confirmpass_input: TextInputEditText
+
+    // Terms and Conditions CheckBox and TextButtons
+    private lateinit var acceptTerms : CheckBox
+    private lateinit var terms : TextView
+    private lateinit var privacyPolicy : TextView
+
+    // Sign Up Button and Login Suggestion
+    private lateinit var signupBtn: ImageView
+    private lateinit var loginSugg: TextView
 
     private val client = OkHttpClient()
 
@@ -51,18 +65,40 @@ class SignUp : AppCompatActivity() {
 
     private fun initViews() {
         backBtn = findViewById(R.id.backBtn)
-        usernameInput = findViewById(R.id.username_input)
-        emailInput = findViewById(R.id.email_input)
-        passwordInput = findViewById(R.id.password_input)
-        signupBtn = findViewById(R.id.signin_btn)
-        loginSugg = findViewById(R.id.login_sugg)
 
+        // TextField Containers / Text Helpers
         usernameContainer = findViewById(R.id.username_container)
         emailContainer = findViewById(R.id.email_container)
         passwordContainer = findViewById(R.id.password_container)
+        confirmpass_container = findViewById(R.id.confirmpass_container)
 
+        // TextField Inputs
+        usernameInput = findViewById(R.id.username_input)
+        emailInput = findViewById(R.id.email_input)
+        passwordInput = findViewById(R.id.password_input)
+        confirmpass_input = findViewById(R.id.confirmpass_input)
+
+        // Terms and Conditions CheckBox and TextButtons
+        acceptTerms = findViewById(R.id.acceptTerms)
+        terms = findViewById(R.id.terms)
+        privacyPolicy = findViewById(R.id.privacyPolicy)
+
+        // Sign Up Button and Login Suggestion
+        signupBtn = findViewById(R.id.signin_btn)
+        loginSugg = findViewById(R.id.login_sugg)
+
+
+        // Terms Underline Text
+        terms.paintFlags = terms.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
+        terms.setTextColor(getColor(R.color.smth_orange))
+
+        // Privacy Policy Underline Text
+        privacyPolicy.paintFlags = privacyPolicy.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
+        privacyPolicy.setTextColor(getColor(R.color.smth_orange))
+
+        // Login Suggestion Underline Text
         loginSugg.paintFlags = loginSugg.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        loginSugg.setTextColor(getColor(R.color.smth_black))
+        loginSugg.setTextColor(getColor(R.color.smth_orange))
     }
 
     private fun setupButtonListeners() {
