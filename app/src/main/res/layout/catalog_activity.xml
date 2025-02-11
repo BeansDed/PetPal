@@ -10,15 +10,6 @@
         tools:context=".CatalogActivity"
         tools:openDrawer="start">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Catalog"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/alata"
-        android:gravity="top"/>
-
         <!-- Main Content -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,13 +27,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
+                <!-- Menu Button -->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/menuIcon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="start"
+                    android:layout_marginStart="30dp"
                     android:src="@drawable/menu_bar" />  <!-- Make sure this drawable exists and is visible -->
 
+                <!-- Catalog Title -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,15 +56,17 @@
                     android:src="@drawable/search"
                     /> -->
 
+                <!-- Cart Button -->
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/cartIcon"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="30dp"
                     android:src="@drawable/cart" />
             </androidx.appcompat.widget.Toolbar>
 
+            <!-- Search Input -->
             <EditText
                 android:id="@+id/search_bar"
                 android:layout_width="350dp"
@@ -101,14 +97,14 @@
                 app:layout_constraintTop_toBottomOf="@id/search_bar"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+            <!-- Product Category -->
             <HorizontalScrollView
                 android:id="@+id/categoryScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:scrollbars="none"
-                app:layout_constraintTop_toBottomOf="@id/browseText"
-                tools:layout_editor_absoluteX="-183dp">
+                app:layout_constraintTop_toBottomOf="@id/browseText">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -186,25 +182,43 @@
                 </LinearLayout>
             </HorizontalScrollView>
 
+            <TextView
+                android:id="@+id/recommendTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recommended Items"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:layout_marginStart="30dp"
+                app:layout_constraintTop_toBottomOf="@id/categoryScrollView"
+                app:layout_constraintStart_toStartOf="parent"/>
 
+            <!-- Product List -->
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/recommendTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-            <!-- Product Grid -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productsRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
-                app:layout_constraintTop_toBottomOf="@id/categoryScrollView" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="365dp"
+                    android:scrollbars="vertical"
+                    app:spanCount="2"/>
 
-            <!-- Fragment Container -->
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@id/productsRecyclerView"
-                app:layout_constraintBottom_toBottomOf="@id/productsRecyclerView" />
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintTop_toTopOf="@id/productsRecyclerView"
+                    app:layout_constraintBottom_toBottomOf="@id/productsRecyclerView"/>
+
+            </LinearLayout>
 
             <!-- Bottom Navigation -->
             <com.google.android.material.bottomnavigation.BottomNavigationView
