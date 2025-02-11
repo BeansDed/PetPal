@@ -4,14 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.CheckBox
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import okhttp3.*
@@ -28,18 +24,18 @@ class SignUp : AppCompatActivity() {
     private lateinit var usernameContainer: TextInputLayout
     private lateinit var emailContainer: TextInputLayout
     private lateinit var passwordContainer: TextInputLayout
-    private lateinit var confirmpass_container: TextInputLayout
+    private lateinit var confirmPasswordContainer: TextInputLayout
 
     // TextField Inputs
     private lateinit var usernameInput: TextInputEditText
     private lateinit var emailInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
-    private lateinit var confirmpass_input: TextInputEditText
+    private lateinit var confirmPasswordInput: TextInputEditText
 
-    // Terms and Conditions CheckBox and TextButtons
-    private lateinit var acceptTerms : CheckBox
-    private lateinit var terms : TextView
-    private lateinit var privacyPolicy : TextView
+    // Terms and Conditions
+    private lateinit var acceptTerms: CheckBox
+    private lateinit var terms: TextView
+    private lateinit var privacyPolicy: TextView
 
     // Sign Up Button and Login Suggestion
     private lateinit var signupBtn: ImageView
@@ -49,83 +45,61 @@ class SignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_sign_up)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         initViews()
-        setupButtonListeners()
-        setupFocusListeners()
+        setupListeners()
     }
 
     private fun initViews() {
         backBtn = findViewById(R.id.backBtn)
 
-        // TextField Containers / Text Helpers
         usernameContainer = findViewById(R.id.username_container)
         emailContainer = findViewById(R.id.email_container)
         passwordContainer = findViewById(R.id.password_container)
-        confirmpass_container = findViewById(R.id.confirmpass_container)
+        confirmPasswordContainer = findViewById(R.id.confirmpass_container)
 
-        // TextField Inputs
         usernameInput = findViewById(R.id.username_input)
         emailInput = findViewById(R.id.email_input)
         passwordInput = findViewById(R.id.password_input)
-        confirmpass_input = findViewById(R.id.confirmpass_input)
+        confirmPasswordInput = findViewById(R.id.confirmpass_input)
 
-        // Terms and Conditions CheckBox and TextButtons
         acceptTerms = findViewById(R.id.acceptTerms)
         terms = findViewById(R.id.terms)
         privacyPolicy = findViewById(R.id.privacyPolicy)
 
-        // Sign Up Button and Login Suggestion
         signupBtn = findViewById(R.id.signin_btn)
         loginSugg = findViewById(R.id.login_sugg)
 
-
-        // Terms Underline Text
+        // Underline texts for Terms, Privacy, and Login Suggestion
         terms.paintFlags = terms.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        terms.setTextColor(getColor(R.color.smth_orange))
-
-        // Privacy Policy Underline Text
         privacyPolicy.paintFlags = privacyPolicy.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        privacyPolicy.setTextColor(getColor(R.color.smth_orange))
-
-        // Login Suggestion Underline Text
         loginSugg.paintFlags = loginSugg.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        loginSugg.setTextColor(getColor(R.color.smth_orange))
     }
 
-    private fun setupButtonListeners() {
+    private fun setupListeners() {
         backBtn.setOnClickListener {
-            finish()  // Go back to the previous activity
+            finish()
         }
+
         signupBtn.setOnClickListener {
             if (validateInputs()) {
                 performRegistration()
             }
         }
+
         loginSugg.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, Login::class.java))
         }
     }
 
-    private fun setupFocusListeners() {
-        usernameInput.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateUsername()
-        }
-        emailInput.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateEmail()
-        }
-        passwordInput.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validatePassword()
-        }
+    private fun validateInputs(): Boolean {
+        val usernameValid = validateUsername()
+        val emailValid = validateEmail()
+        val passwordValid = validatePassword()
+        val termsAccepted = validateTerms()
+
+        return usernameValid && emailValid && passwordValid && termsAccepted
     }
 
     private fun validateUsername(): Boolean {
@@ -155,23 +129,31 @@ class SignUp : AppCompatActivity() {
 
     private fun validatePassword(): Boolean {
         val password = passwordInput.text.toString().trim()
+        val confirmPassword = confirmPasswordInput.text.toString().trim()
+
         return if (password.isEmpty()) {
             passwordContainer.error = "Password is required"
             false
         } else if (password.length < 8) {
             passwordContainer.error = "Password must be at least 8 characters"
             false
+        } else if (password != confirmPassword) {
+            confirmPasswordContainer.error = "Passwords do not match"
+            false
         } else {
             passwordContainer.error = null
+            confirmPasswordContainer.error = null
             true
         }
     }
 
-    private fun validateInputs(): Boolean {
-        val isUsernameValid = validateUsername()
-        val isEmailValid = validateEmail()
-        val isPasswordValid = validatePassword()
-        return isUsernameValid && isEmailValid && isPasswordValid
+    private fun validateTerms(): Boolean {
+        return if (!acceptTerms.isChecked) {
+            Toast.makeText(this, "You must accept the terms and conditions.", Toast.LENGTH_LONG).show()
+            false
+        } else {
+            true
+        }
     }
 
     private fun performRegistration() {
@@ -189,7 +171,7 @@ class SignUp : AppCompatActivity() {
         val requestBody = jsonObject.toString().toRequestBody(mediaType)
 
         val request = Request.Builder()
-            .url("http://192.168.1.12/backend/mobile_register.php")  // Change this to your actual endpoint
+            .url("http://192.168.1.12/backend/mobile_register.php")
             .post(requestBody)
             .build()
 

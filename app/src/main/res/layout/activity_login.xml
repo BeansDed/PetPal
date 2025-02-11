@@ -8,21 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
-
-    <!-- IDs
-
-    @backBtn
-    @username_container
-    @username_input
-    @password_container
-    @password_input
-    @rememberMe
-    @forgotBtn
-    @loginBtn
-    @signup_suggestion
-
-    -->
-
     <!-- Top Design -->
     <RelativeLayout
         android:layout_width="wrap_content"

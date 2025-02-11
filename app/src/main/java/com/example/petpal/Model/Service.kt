@@ -1,11 +1,10 @@
-package com.example.petpal.Controller
+package com.example.petpal
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
 data class Service(
-    val title: String,
+    val id: Int,
+    val serviceName: String,
     val description: String,
+    val price: Double,
+    val status: String,
     val imageUrl: String? = null
-) : Parcelable
+)

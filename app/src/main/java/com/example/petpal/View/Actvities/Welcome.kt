@@ -2,47 +2,74 @@ package com.example.petpal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class Welcome : AppCompatActivity() {
 
-    private lateinit var loginBtn : ImageView
-    private lateinit var signupBtn : ImageView
-    private lateinit var skipBtn : TextView
+    private lateinit var loginBtn: ImageView
+    private lateinit var signupBtn: ImageView
+    private lateinit var skipBtn: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_welcome)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        Log.d("WelcomeActivity", "Activity created")
+
+        initViews()
+        setupListeners()
+    }
+
+    private fun initViews() {
+        try {
+            loginBtn = findViewById(R.id.login_btn)
+            signupBtn = findViewById(R.id.signup_btn)
+            skipBtn = findViewById(R.id.skip_btn)
+
+            Log.d("WelcomeActivity", "Views initialized successfully")
+
+        } catch (e: Exception) {
+            Log.e("WelcomeActivity", "Error initializing views", e)
+            Toast.makeText(this, "Error initializing views: ${e.message}", Toast.LENGTH_LONG).show()
         }
+    }
 
-        loginBtn = findViewById(R.id.login_btn)
-        signupBtn = findViewById(R.id.signup_btn)
-        skipBtn = findViewById(R.id.skip_btn)
-
+    private fun setupListeners() {
         loginBtn.setOnClickListener {
-            val intent = Intent(this, Login::class.java)
-            startActivity(intent)
+            Log.d("WelcomeActivity", "Login button clicked")
+            try {
+                val intent = Intent(this, Login::class.java)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("WelcomeActivity", "Error starting Login activity", e)
+                Toast.makeText(this, "Failed to start Login activity: ${e.message}", Toast.LENGTH_LONG).show()
+            }
         }
 
         signupBtn.setOnClickListener {
-            val intent = Intent(this, SignUp::class.java)
-            startActivity(intent)
+            Log.d("WelcomeActivity", "Signup button clicked")
+            try {
+                val intent = Intent(this, SignUp::class.java)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("WelcomeActivity", "Error starting Signup activity", e)
+                Toast.makeText(this, "Failed to start Signup activity: ${e.message}", Toast.LENGTH_LONG).show()
+            }
         }
 
         skipBtn.setOnClickListener {
-            val intent = Intent(this, CatalogActivity::class.java)
-            startActivity(intent)
+            Log.d("WelcomeActivity", "Skip button clicked")
+            try {
+                val intent = Intent(this, CatalogActivity::class.java)
+                startActivity(intent)
+            } catch (e: Exception) {
+                Log.e("WelcomeActivity", "Error starting Catalog activity", e)
+                Toast.makeText(this, "Failed to start Catalog activity: ${e.message}", Toast.LENGTH_LONG).show()
+            }
         }
-
     }
 }

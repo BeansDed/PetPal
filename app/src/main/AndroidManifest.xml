@@ -17,7 +17,7 @@
         android:theme="@style/Base.Theme.PetPal"
         android:usesCleartextTraffic="true">
 
-        <!-- Main Activity with launcher intent -->
+        <!-- Main Activity -->
         <activity
             android:name=".Welcome"
             android:exported="true">
@@ -39,10 +39,10 @@
 
         <activity
             android:name=".SignUp"
-            android:exported="false" />
+            android:exported="true" />
 
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 </manifest>
