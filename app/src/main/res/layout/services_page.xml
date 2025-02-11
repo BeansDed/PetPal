@@ -85,140 +85,193 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/browseText"
+            android:id="@+id/scheduleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Schedule an Appointment"
             android:textSize="20sp"
+            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:fontFamily="@font/alata"
             android:paddingTop="10dp"
-            android:layout_marginStart="30dp"
             app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="@id/search_bar"/>
 
-        <!-- Product Category -->
-        <HorizontalScrollView
-            android:id="@+id/categoryScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:scrollbars="none"
-            app:layout_constraintTop_toBottomOf="@id/browseText">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:orientation="horizontal"
-                android:paddingHorizontal="17dp">
-
-                <!-- Category Buttons -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/smth_orange"
-                    android:text="All Items"
-                    android:textColor="@color/white"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryFood"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/light_smth"
-                    android:text="Dog Items"
-                    android:textColor="@color/gray"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryToys"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/light_smth"
-                    android:text="Cat Items"
-                    android:textColor="@color/gray"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryAccessories"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="#F5F5F5"
-                    android:text="Accessories"
-                    android:textColor="@color/gray"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryGrooming"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="#F5F5F5"
-                    android:text="Grooming"
-                    android:textColor="@color/gray"
-                    app:cornerRadius="20dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/categoryHealth"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="#F5F5F5"
-                    android:text="Health"
-                    android:textColor="@color/gray"
-                    app:cornerRadius="20dp" />
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/recommendTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recommended Items"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/alata"
-            android:layout_marginStart="30dp"
-            app:layout_constraintTop_toBottomOf="@id/categoryScrollView"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <!-- Product List -->
-        <LinearLayout
+        <!-- Grooming Services List -->
+        <RelativeLayout
+            android:id="@+id/groomingServices"
             android:layout_width="330dp"
-            android:layout_height="wrap_content"
+            android:layout_height="220dp"
+            android:background="@drawable/product_container"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/recommendTxt"
+            android:backgroundTint="@color/light_orange"
+            app:layout_constraintTop_toBottomOf="@id/scheduleText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/productsRecyclerView"
+            <!-- Grooming Image -->
+            <ImageView
+                android:id="@+id/service_image"
                 android:layout_width="match_parent"
-                android:layout_height="365dp"
-                android:scrollbars="vertical"
-                app:spanCount="2"/>
+                android:layout_height="160dp"
+                android:src="@drawable/cat"
+                android:contentDescription="@string/design_desc"/>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_container"
+            <TextView
+                android:id="@+id/groomingServices_text"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="@id/productsRecyclerView"
-                app:layout_constraintBottom_toBottomOf="@id/productsRecyclerView"/>
+                android:layout_height="wrap_content"
+                android:text="Grooming Services"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:layout_marginBottom="-20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:layout_alignBottom="@id/service_image"/>
 
-        </LinearLayout>
+            <ImageView
+                android:id="@+id/services_rateLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_alignTop="@id/groomingServices_text"
+                android:layout_alignEnd="@id/groomingServices_text"
+                android:src="@drawable/star"
+                android:contentDescription="@string/design_desc"/>
+
+            <!-- Grooming Rate -->
+            <TextView
+                android:id="@+id/services_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="13sp"
+                android:textColor="@color/smth_orange"
+                android:fontFamily="@font/alata"
+                android:layout_marginEnd="32dp"
+                android:layout_alignBottom="@id/groomingServices_text"
+                android:layout_alignEnd="@id/groomingServices_text"/>
+
+            <!-- Grooming Services Availability -->
+            <TextView
+                android:id="@+id/groom_availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available for Scheduling"
+                android:textSize="15sp"
+                android:textColor="@color/smth_orange"
+                android:fontFamily="@font/alata"
+                android:layout_alignBottom="@id/groomingServices_text"
+                android:layout_marginBottom="-25dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"/>
+
+            <!-- Grooming Services Price -->
+            <TextView
+                android:id="@+id/grooming_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$500"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:layout_alignEnd="@id/groomingServices_text"
+                android:layout_alignBottom="@id/groomingServices_text"
+                android:layout_marginBottom="-25dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp"/>
+
+        </RelativeLayout>
+
+        <!-- Veterinary Services Image -->
+        <RelativeLayout
+            android:id="@+id/veterinary_services"
+            android:layout_width="330dp"
+            android:layout_height="220dp"
+            android:background="@drawable/product_container"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:backgroundTint="@color/light_orange"
+            app:layout_constraintTop_toBottomOf="@id/groomingServices"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/veterinary_image"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:src="@drawable/cat"
+                android:contentDescription="@string/design_desc"/>
+
+            <TextView
+                android:id="@+id/veterinaryServices_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Veterinary Services"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:layout_marginBottom="-20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"
+                android:layout_alignBottom="@id/veterinary_image"/>
+
+            <ImageView
+                android:id="@+id/star_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:layout_alignTop="@id/veterinaryServices_text"
+                android:layout_alignEnd="@id/veterinaryServices_text"
+                android:src="@drawable/star"
+                android:contentDescription="@string/design_desc"/>
+
+            <!-- Veterinary Services Rate -->
+            <TextView
+                android:id="@+id/veterinary_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textSize="13sp"
+                android:textColor="@color/smth_orange"
+                android:fontFamily="@font/alata"
+                android:layout_marginEnd="32dp"
+                android:layout_alignBottom="@id/veterinaryServices_text"
+                android:layout_alignEnd="@id/veterinaryServices_text"/>
+
+            <!-- Vet Availability Text -->
+            <TextView
+                android:id="@+id/vet_availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available for Scheduling"
+                android:textSize="15sp"
+                android:textColor="@color/smth_orange"
+                android:fontFamily="@font/alata"
+                android:layout_alignBottom="@id/veterinaryServices_text"
+                android:layout_marginBottom="-25dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="10dp"/>
+
+            <!-- Vet Services Price -->
+            <TextView
+                android:id="@+id/vet_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="$500"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alata"
+                android:layout_alignEnd="@id/veterinaryServices_text"
+                android:layout_alignBottom="@id/veterinaryServices_text"
+                android:layout_marginBottom="-25dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp"/>
+
+        </RelativeLayout>
 
         <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
