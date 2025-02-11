@@ -5,20 +5,13 @@
     <item
         android:id="@+id/menu_category"
         android:title="Category"
-        android:icon="@drawable/menu_book" />
+        android:icon="@drawable/home_icon" />
 
     <!-- Service item -->
     <item
         android:id="@+id/menu_service"
         android:title="Service"
         android:icon="@drawable/baseline_receipt_24" />
-
-    <item
-        android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/profile">
-
-    </item>
 
 
 </menu>
