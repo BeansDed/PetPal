@@ -72,10 +72,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/schedule_txt">
 
 
@@ -88,105 +89,100 @@
             <ImageView
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/cat"
                 android:background="@drawable/image_container"
-                android:contentDescription="@string/design_desc"/>
+                android:contentDescription="@string/design_desc"
+                android:src="@drawable/cat" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
 
             <!-- Name Input -->
             <EditText
                 android:id="@+id/name_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Enter your name"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="name"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your name"
                 android:inputType="text"
                 android:lines="1"
-                android:autofillHints="name"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Address Input -->
             <EditText
                 android:id="@+id/address_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Enter your address"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="postalAddress"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your address"
                 android:inputType="text"
                 android:lines="1"
-                android:autofillHints="postalAddress"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Phone Number Input -->
             <EditText
                 android:id="@+id/phone_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Enter your phone number"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="phone"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your phone number"
                 android:inputType="number"
                 android:lines="1"
                 android:maxLength="11"
-                android:autofillHints="phone"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp" />
 
             <!-- Pet Name Input -->
             <EditText
                 android:id="@+id/petName_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Enter your pet's name"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="name"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your pet's name"
                 android:inputType="text"
                 android:lines="1"
-                android:autofillHints="name"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Pet Breed Input -->
             <EditText
                 android:id="@+id/petBreed_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Enter your pet's breed"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="name"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your pet's breed"
                 android:inputType="text"
                 android:lines="1"
-                android:autofillHints="name"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -205,7 +201,7 @@
 
                 <Space
                     android:layout_width="60dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
                 <CheckBox
                     android:id="@+id/dog_checkbox"
@@ -219,60 +215,86 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Type of Groom Input -->
             <EditText
                 android:id="@+id/groomType_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    Type of Groom"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints="name"
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Type of Groom"
                 android:inputType="text"
                 android:lines="1"
-                android:autofillHints="name"
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Notes Input -->
             <EditText
                 android:id="@+id/note_input"
                 android:layout_width="320dp"
                 android:layout_height="80dp"
-                android:hint="    Enter your pet's breed"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints=""
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Enter your pet's breed"
                 android:inputType="text"
                 android:lines="10"
-                android:autofillHints=""
-                />
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
 
             <!-- Schedule Date Input -->
             <EditText
                 android:id="@+id/date_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:hint="    MM/DD/YY"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
+                android:autofillHints=""
                 android:background="@drawable/user_input_roundedcorner"
+                android:hint="    MM/DD/YY"
                 android:inputType="date"
                 android:lines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <!-- Choose a Payment Method -->
+            <EditText
+                android:id="@+id/payment_method"
+                android:layout_width="320dp"
+                android:layout_height="40dp"
                 android:autofillHints=""
-                />
+                android:background="@drawable/user_input_roundedcorner"
+                android:hint="    Choose a payment method"
+                android:inputType="date"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <!-- Schedule Appointment Button -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/apointment_btn"
+                android:contentDescription="@string/design_desc"/>
 
         </LinearLayout>
 

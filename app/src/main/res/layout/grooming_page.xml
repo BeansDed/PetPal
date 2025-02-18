@@ -259,7 +259,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"/>
 
-            <!-- Schedule Date Input -->
+            <!-- Choose a Payment Method -->
             <EditText
                 android:id="@+id/date_input"
                 android:layout_width="320dp"
@@ -273,6 +273,17 @@
                 android:lines="1"
                 android:autofillHints=""
                 />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+            <!-- Schedule Appointment Button -->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/apointment_btn"
+                android:contentDescription="@string/design_desc"/>
 
         </LinearLayout>
 
