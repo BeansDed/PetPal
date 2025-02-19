@@ -1,297 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
+    android:id="@+id/scrollRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".CatalogActivity"
-    tools:openDrawer="start">
+    android:fillViewport="true">
 
-    <!-- Main Content -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/service_page_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <!-- Toolbar -->
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            android:elevation="4dp"
-            android:gravity="top|center"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <!-- Menu Button -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/menuIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="start"
-                android:layout_marginStart="30dp"
-                android:src="@drawable/menu_bar" />  <!-- Make sure this drawable exists and is visible -->
-
-            <!-- Catalog Title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Services"
-                android:textSize="25sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"/>
-
-            <!--
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/searchIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/search"
-                /> -->
-
-            <!-- Cart Button -->
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/cartIcon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="end"
-                android:layout_marginEnd="30dp"
-                android:src="@drawable/cart" />
-        </androidx.appcompat.widget.Toolbar>
-
-        <!-- Search Input -->
-        <EditText
-            android:id="@+id/search_bar"
-            android:layout_width="350dp"
-            android:layout_height="60dp"
-            android:hint="      Search"
-            android:textSize="18sp"
-            android:fontFamily="@font/alata"
-            android:textColorHint="@color/black"
-            android:maxLines="1"
-            android:drawableEnd="@drawable/search_icon"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:background="@drawable/searchactivity_roundedcorner"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
+        <!-- "Schedule an Appointment" heading -->
         <TextView
-            android:id="@+id/scheduleText"
+            android:id="@+id/scheduleAppointmentTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:text="Schedule an Appointment"
             android:textSize="20sp"
-            android:layout_marginStart="10dp"
             android:textColor="@color/black"
             android:fontFamily="@font/alata"
-            android:paddingTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/search_bar"
-            app:layout_constraintStart_toStartOf="@id/search_bar"/>
-
-
-        <!-- Grooming Services List -->
-        <RelativeLayout
-            android:id="@+id/groomingServices"
-            android:layout_width="330dp"
-            android:layout_height="220dp"
-            android:background="@drawable/product_container"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:backgroundTint="@color/light_orange"
-            app:layout_constraintTop_toBottomOf="@id/scheduleText"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            <!-- Grooming Image -->
-            <ImageView
-                android:id="@+id/service_image"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:src="@drawable/cat"
-                android:contentDescription="@string/design_desc"/>
-
-            <TextView
-                android:id="@+id/groomingServices_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Grooming Services"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"
-                android:layout_marginBottom="-20dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:layout_alignBottom="@id/service_image"/>
-
-            <ImageView
-                android:id="@+id/services_rateLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:layout_alignTop="@id/groomingServices_text"
-                android:layout_alignEnd="@id/groomingServices_text"
-                android:src="@drawable/star"
-                android:contentDescription="@string/design_desc"/>
-
-            <!-- Grooming Rate -->
-            <TextView
-                android:id="@+id/services_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.5"
-                android:textSize="13sp"
-                android:textColor="@color/smth_orange"
-                android:fontFamily="@font/alata"
-                android:layout_marginEnd="32dp"
-                android:layout_alignBottom="@id/groomingServices_text"
-                android:layout_alignEnd="@id/groomingServices_text"/>
-
-            <!-- Grooming Services Availability -->
-            <TextView
-                android:id="@+id/groom_availability"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Available for Scheduling"
-                android:textSize="15sp"
-                android:textColor="@color/smth_orange"
-                android:fontFamily="@font/alata"
-                android:layout_alignBottom="@id/groomingServices_text"
-                android:layout_marginBottom="-25dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"/>
-
-            <!-- Grooming Services Price -->
-            <TextView
-                android:id="@+id/grooming_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$500"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"
-                android:layout_alignEnd="@id/groomingServices_text"
-                android:layout_alignBottom="@id/groomingServices_text"
-                android:layout_marginBottom="-25dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="30dp"/>
-
-        </RelativeLayout>
-
-        <!-- Veterinary Services Image -->
-        <RelativeLayout
-            android:id="@+id/veterinary_services"
-            android:layout_width="330dp"
-            android:layout_height="220dp"
-            android:background="@drawable/product_container"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:backgroundTint="@color/light_orange"
-            app:layout_constraintTop_toBottomOf="@id/groomingServices"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageView
-                android:id="@+id/veterinary_image"
-                android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:src="@drawable/cat"
-                android:contentDescription="@string/design_desc"/>
-
-            <TextView
-                android:id="@+id/veterinaryServices_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Veterinary Services"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"
-                android:layout_marginBottom="-20dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"
-                android:layout_alignBottom="@id/veterinary_image"/>
-
-            <ImageView
-                android:id="@+id/star_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:layout_alignTop="@id/veterinaryServices_text"
-                android:layout_alignEnd="@id/veterinaryServices_text"
-                android:src="@drawable/star"
-                android:contentDescription="@string/design_desc"/>
-
-            <!-- Veterinary Services Rate -->
-            <TextView
-                android:id="@+id/veterinary_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4.5"
-                android:textSize="13sp"
-                android:textColor="@color/smth_orange"
-                android:fontFamily="@font/alata"
-                android:layout_marginEnd="32dp"
-                android:layout_alignBottom="@id/veterinaryServices_text"
-                android:layout_alignEnd="@id/veterinaryServices_text"/>
-
-            <!-- Vet Availability Text -->
-            <TextView
-                android:id="@+id/vet_availability"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Available for Scheduling"
-                android:textSize="15sp"
-                android:textColor="@color/smth_orange"
-                android:fontFamily="@font/alata"
-                android:layout_alignBottom="@id/veterinaryServices_text"
-                android:layout_marginBottom="-25dp"
-                android:paddingStart="20dp"
-                android:paddingEnd="10dp"/>
-
-            <!-- Vet Services Price -->
-            <TextView
-                android:id="@+id/vet_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$500"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"
-                android:layout_alignEnd="@id/veterinaryServices_text"
-                android:layout_alignBottom="@id/veterinaryServices_text"
-                android:layout_marginBottom="-25dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="30dp"/>
-
-        </RelativeLayout>
-
-        <!-- Bottom Navigation -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
+        <!-- Card for Grooming Services -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardGrooming"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/light_orange"
-            app:menu="@menu/bottom_nav_menu"
-            app:layout_constraintBottom_toBottomOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/scheduleAppointmentTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Navigation View
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
-        android:background="@color/white"
-        app:itemIconTint="@color/smth_orange"
-        app:itemTextColor="@color/smth_orange" />  -->
-</androidx.drawerlayout.widget.DrawerLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cat"
+                    android:contentDescription="@string/design_desc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Grooming Services"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/alata"
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available for Scheduling"
+                    android:textSize="14sp"
+                    android:textColor="@color/smth_orange"
+                    android:fontFamily="@font/alata"
+                    android:paddingBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₱700"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/alata" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card for Veterinary Services -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardVeterinary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/cardGrooming"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cat"
+                    android:contentDescription="@string/design_desc" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Veterinary Services"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/alata"
+                    android:paddingTop="8dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available for Scheduling"
+                    android:textSize="14sp"
+                    android:textColor="@color/smth_orange"
+                    android:fontFamily="@font/alata"
+                    android:paddingBottom="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₱500"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/alata" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

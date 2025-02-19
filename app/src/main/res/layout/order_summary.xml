@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
+    <!-- Back Button -->
     <ImageView
         android:id="@+id/backBtn"
         android:layout_width="40dp"
@@ -17,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Top Container (Header) -->
     <LinearLayout
         android:id="@+id/top_container"
         android:layout_width="match_parent"
@@ -35,9 +37,9 @@
             android:text="Shopping Cart"
             android:textColor="@color/black"
             android:textSize="25sp" />
-
     </LinearLayout>
 
+    <!-- Product Image Container -->
     <LinearLayout
         android:id="@+id/productImage_container"
         android:layout_width="wrap_content"
@@ -56,7 +58,8 @@
             android:src="@drawable/cat"
             android:contentDescription="@string/design_desc"/>
     </LinearLayout>
-    
+
+    <!-- Order Summary Details -->
     <LinearLayout
         android:layout_width="291dp"
         android:layout_height="wrap_content"
@@ -66,28 +69,25 @@
         android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/top_container"
         app:layout_constraintStart_toEndOf="@id/productImage_container">
-        
+
         <TextView
+            android:id="@+id/summaryProductName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
             android:textSize="17sp"
-            android:textColor="@color/black"
-            />
-
+            android:textColor="@color/black"/>
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Manufacturer"
             android:textSize="17sp"
-            android:textColor="@color/black"
-            />
-
+            android:textColor="@color/black"/>
         <TextView
+            android:id="@+id/summaryProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$ 50"
@@ -95,10 +95,9 @@
             android:textColor="@color/black"
             android:fontFamily="@font/alata"
             android:layout_gravity="start"/>
-
     </LinearLayout>
 
-
+    <!-- Product Quantity Section -->
     <LinearLayout
         android:id="@+id/productQuantity"
         android:layout_width="match_parent"
@@ -108,8 +107,7 @@
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/productImage_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -118,11 +116,9 @@
             android:textSize="17sp"
             android:fontFamily="@font/alata"
             android:textColor="@color/black"/>
-
         <Space
             android:layout_width="170dp"
             android:layout_height="wrap_content"/>
-
         <ImageView
             android:id="@+id/subtract_btn"
             android:layout_width="wrap_content"
@@ -130,11 +126,9 @@
             android:src="@drawable/remove"
             android:background="@drawable/add_subtract_corners"
             android:contentDescription="@string/design_desc"/>
-
         <Space
             android:layout_width="15dp"
             android:layout_height="wrap_content"/>
-
         <!-- Product Quantity -->
         <TextView
             android:id="@+id/product_quantity"
@@ -143,11 +137,9 @@
             android:text="1"
             android:textSize="20sp"
             android:textColor="@color/black"/>
-
         <Space
             android:layout_width="15dp"
             android:layout_height="wrap_content"/>
-
         <!-- Add Checkout Quantity -->
         <ImageView
             android:id="@+id/add_product"
@@ -156,27 +148,19 @@
             android:src="@drawable/add"
             android:background="@drawable/add_subtract_corners"
             android:contentDescription="@string/design_desc"/>
-
     </LinearLayout>
 
-    <Space
-        android:id="@+id/spacer2"
-        android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        app:layout_constraintTop_toBottomOf="@id/productQuantity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
+    <!-- Order Summary Details (Subtotal, Total, Payment Method, etc.) -->
     <LinearLayout
         android:id="@+id/order_summary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/spacer2"
+        app:layout_constraintTop_toBottomOf="@id/productQuantity"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp">
 
-        <!-- Order Summary -->
+        <!-- Order Summary Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -184,11 +168,9 @@
             android:textSize="17sp"
             android:fontFamily="@font/alata"
             android:textColor="@color/black"/>
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="15dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -201,11 +183,9 @@
                 android:text="Subtotal"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
-
             <Space
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -213,70 +193,25 @@
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"/>
-
-        </LinearLayout>
-
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Subtotal"
-                android:textSize="15sp"
-                android:textColor="@color/black"/>
-
-            <Space
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="$ 50"
-                android:textSize="15sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/alata"/>
-
         </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"/>
-
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Total"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
-
             <Space
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -284,14 +219,13 @@
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"/>
-
         </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"/>
 
-        <!-- Payment Method -->
+        <!-- Payment Method Section -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -299,77 +233,61 @@
             android:textSize="17sp"
             android:fontFamily="@font/alata"
             android:textColor="@color/black"/>
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="15dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cash on Delivery (COD)"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
-
             <Space
                 android:layout_width="165dp"
                 android:layout_height="wrap_content"/>
-
             <CheckBox
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
-
         </LinearLayout>
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"/>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Gcash"
                 android:textSize="15sp"
                 android:textColor="@color/black"/>
-
             <Space
                 android:layout_width="277dp"
                 android:layout_height="wrap_content"/>
-
             <CheckBox
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
-
         </LinearLayout>
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="10dp"/>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alata"
                 android:text="By placing an order, you agree to "
                 android:textSize="13sp"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -377,21 +295,17 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"
                 android:textSize="13sp"/>
-
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/alata"
                 android:text="acknowledge that you have read the "
                 android:textSize="13sp"/>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -399,10 +313,10 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/alata"
                 android:textSize="13sp"/>
-
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Bottom Container for Order Total and Checkout Button -->
     <LinearLayout
         android:id="@+id/bottom_container"
         android:layout_width="match_parent"
@@ -433,14 +347,15 @@
                 android:fontFamily="@font/alata"
                 android:layout_gravity="end"
                 android:textColor="@color/black"/>
-
         </LinearLayout>
 
         <Space
             android:layout_width="20dp"
             android:layout_height="wrap_content"/>
 
+        <!-- This is our Checkout/Confirm Payment button -->
         <ImageView
+            android:id="@+id/confirmPaymentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/checkout"

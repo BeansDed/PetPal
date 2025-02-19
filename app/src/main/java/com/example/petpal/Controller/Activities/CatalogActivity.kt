@@ -2,29 +2,51 @@ package com.example.petpal
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.EditText
+import android.widget.HorizontalScrollView
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.petpal.Controller.Activities.CartActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
 class CatalogActivity : AppCompatActivity() {
 
-    // Views
+    // Drawer / Navigation
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
+
+    // UI references
+    private lateinit var toolbarTitle: TextView
+    private lateinit var browseText: TextView
+    private lateinit var recommendTxt: TextView
+    private lateinit var categoryScrollView: HorizontalScrollView
     private lateinit var productsRecyclerView: RecyclerView
+    private lateinit var fragmentContainer: View
+
+    // Buttons / Nav
     private lateinit var cartButton: ImageView
-    private lateinit var searchIcon: ImageView
-    private lateinit var bottomTabLayout: TabLayout
+    private lateinit var menuIcon: ImageView
+    private lateinit var searchBar: EditText
+    private lateinit var bottomNavigation: BottomNavigationView
+
+    // Category Buttons
+    private lateinit var categoryAll: MaterialButton
+    private lateinit var categoryFood: MaterialButton
+    private lateinit var categoryToys: MaterialButton
+    private lateinit var categoryAccessories: MaterialButton
+    private lateinit var categoryGrooming: MaterialButton
+    private lateinit var categoryHealth: MaterialButton
 
     // Data
     private val client = OkHttpClient()
@@ -37,92 +59,111 @@ class CatalogActivity : AppCompatActivity() {
 
         initializeViews()
         setupNavigationDrawer()
+        setupBottomNavigation()
+        setupCategoryButtons()
         checkUserAndFetchProducts()
     }
 
     private fun initializeViews() {
-        try {
-            // Initialize views with their respective IDs
-            drawerLayout = findViewById(R.id.drawer_layout)
-            navigationView = findViewById(R.id.nav_view)
-            productsRecyclerView = findViewById(R.id.productsRecyclerView)
-            productsRecyclerView.layoutManager = GridLayoutManager(this, 2)
-            productsRecyclerView.adapter = CatalogAdapter(this, productList)
+        drawerLayout = findViewById(R.id.drawer_layout)
+        navigationView = findViewById(R.id.nav_view)
+        toolbarTitle = findViewById(R.id.toolbarTitle)
+        browseText = findViewById(R.id.browseText)
+        recommendTxt = findViewById(R.id.recommendTxt)
+        categoryScrollView = findViewById(R.id.categoryScrollView)
+        productsRecyclerView = findViewById(R.id.productsRecyclerView)
+        productsRecyclerView.layoutManager = GridLayoutManager(this, 2)
+        productsRecyclerView.adapter = CatalogAdapter(this, productList)
+        fragmentContainer = findViewById(R.id.fragment_container)
 
-            // Ensure this ID is an ImageView, not an EditText or other type
-            val menuIcon: ImageView = findViewById(R.id.menuIcon)
-            menuIcon.setOnClickListener {
-                drawerLayout.openDrawer(navigationView)
-            }
-
-            cartButton = findViewById(R.id.cartIcon)
-            cartButton.setOnClickListener {
-                startActivity(Intent(this, CartActivity::class.java))
-            }
-
-            searchIcon = findViewById(R.id.search_bar)
-            searchIcon.setOnClickListener {
-                Toast.makeText(this, "Search feature not implemented yet", Toast.LENGTH_SHORT).show()
-            }
-
-            bottomTabLayout = findViewById(R.id.bottomNavigation)
-            setupBottomTabs()
-
-            Log.d("CatalogActivity", "Views initialized successfully")
-        } catch (e: ClassCastException) {
-            Log.e("CatalogActivity", "View casting error", e)
-            Toast.makeText(this, "Error initializing views: ${e.message}", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Log.e("CatalogActivity", "Error initializing views", e)
-            Toast.makeText(this, "Error initializing views: ${e.message}", Toast.LENGTH_SHORT).show()
+        menuIcon = findViewById(R.id.menuIcon)
+        menuIcon.setOnClickListener {
+            drawerLayout.openDrawer(navigationView)
         }
+
+        cartButton = findViewById(R.id.cartIcon)
+        cartButton.setOnClickListener {
+            startActivity(Intent(this, CartActivity::class.java))
+        }
+
+        searchBar = findViewById(R.id.search_bar)
+        bottomNavigation = findViewById(R.id.bottomNavigation)
+
+        // Category Buttons
+        categoryAll = findViewById(R.id.categoryAll)
+        categoryFood = findViewById(R.id.categoryFood)
+        categoryToys = findViewById(R.id.categoryToys)
+        categoryAccessories = findViewById(R.id.categoryAccessories)
+        categoryGrooming = findViewById(R.id.categoryGrooming)
+        categoryHealth = findViewById(R.id.categoryHealth)
     }
-
-
 
     private fun setupNavigationDrawer() {
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_profile -> {
-                    Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.nav_profile -> {
-                    Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.nav_settings -> {
-                    Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
-                }
-                R.id.nav_logout -> {
-                    logout()
-                }
-                else -> false
+                R.id.nav_profile -> Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_settings -> Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_logout -> logout()
             }
             drawerLayout.closeDrawer(navigationView)
             true
         }
     }
 
-    private fun setupBottomTabs() {
-        bottomTabLayout.addTab(bottomTabLayout.newTab().setText("Products"))
-        bottomTabLayout.addTab(bottomTabLayout.newTab().setText("Services"))
-
-        bottomTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when (tab?.position) {
-                    0 -> fetchProducts()
-                    1 -> Toast.makeText(this@CatalogActivity, "Services feature not implemented", Toast.LENGTH_SHORT).show()
+    private fun setupBottomNavigation() {
+        bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.menu_category -> {
+                    toolbarTitle.text = "Catalog"
+                    showCatalogUI()
+                    fetchProducts()  // re-fetch or just show existing list
+                    true
                 }
+                R.id.menu_service -> {
+                    toolbarTitle.text = "Services"
+                    hideCatalogUI()
+                    showServiceFragment()
+                    true
+                }
+                else -> false
             }
+        }
+    }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-        })
+    private fun showCatalogUI() {
+        browseText.visibility = View.VISIBLE
+        recommendTxt.visibility = View.VISIBLE
+        categoryScrollView.visibility = View.VISIBLE
+        productsRecyclerView.visibility = View.VISIBLE
+        fragmentContainer.visibility = View.GONE
+    }
+
+    private fun hideCatalogUI() {
+        browseText.visibility = View.GONE
+        recommendTxt.visibility = View.GONE
+        categoryScrollView.visibility = View.GONE
+        productsRecyclerView.visibility = View.GONE
+        fragmentContainer.visibility = View.VISIBLE
+    }
+
+    private fun showServiceFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.fragment_container, ServiceFragment())
+        }
+    }
+
+    private fun setupCategoryButtons() {
+        categoryAll.setOnClickListener { fetchProductsByCategory("all") }
+        categoryFood.setOnClickListener { fetchProductsByCategory("dog") }
+        categoryToys.setOnClickListener { fetchProductsByCategory("cat") }
+        categoryAccessories.setOnClickListener { fetchProductsByCategory("accessories") }
+        categoryGrooming.setOnClickListener { fetchProductsByCategory("grooming") }
+        categoryHealth.setOnClickListener { fetchProductsByCategory("health") }
     }
 
     private fun checkUserAndFetchProducts() {
         val sharedPreferences = getSharedPreferences("PetPalPrefs", MODE_PRIVATE)
         currentUserId = sharedPreferences.getInt("user_id", -1)
-
         if (currentUserId == -1) {
             Toast.makeText(this, "Please log in to view products", Toast.LENGTH_SHORT).show()
             logout()
@@ -138,12 +179,10 @@ class CatalogActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("CatalogActivity", "Network error: ${e.message}", e)
                 runOnUiThread {
                     Toast.makeText(this@CatalogActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
                     runOnUiThread {
@@ -151,19 +190,23 @@ class CatalogActivity : AppCompatActivity() {
                     }
                     return
                 }
-
-                try {
-                    val responseData = response.body?.string()
-                    if (responseData.isNullOrEmpty()) throw Exception("Empty response from server")
-
-                    val jsonResponse = JSONObject(responseData)
-                    if (!jsonResponse.optBoolean("success")) {
-                        throw Exception("Failed to fetch products from server")
+                val responseData = response.body?.string()
+                if (responseData.isNullOrEmpty()) {
+                    runOnUiThread {
+                        Toast.makeText(this@CatalogActivity, "Empty response from server", Toast.LENGTH_SHORT).show()
                     }
-
+                    return
+                }
+                try {
+                    val jsonResponse = JSONObject(responseData)
+                    if (!jsonResponse.optBoolean("success", false)) {
+                        runOnUiThread {
+                            Toast.makeText(this@CatalogActivity, "Failed to fetch products from server", Toast.LENGTH_SHORT).show()
+                        }
+                        return
+                    }
                     val productsArray = jsonResponse.optJSONArray("products") ?: return
                     productList.clear()
-
                     for (i in 0 until productsArray.length()) {
                         val productJson = productsArray.getJSONObject(i)
                         productList.add(
@@ -177,12 +220,59 @@ class CatalogActivity : AppCompatActivity() {
                             )
                         )
                     }
-
-                    runOnUiThread {
-                        productsRecyclerView.adapter?.notifyDataSetChanged()
-                    }
+                    runOnUiThread { productsRecyclerView.adapter?.notifyDataSetChanged() }
                 } catch (e: Exception) {
-                    Log.e("CatalogActivity", "Error parsing response", e)
+                    runOnUiThread {
+                        Toast.makeText(this@CatalogActivity, "Parsing error: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        })
+    }
+
+    private fun fetchProductsByCategory(category: String) {
+        val url = "http://192.168.1.12/backend/fetch_product.php?category=$category"
+        val request = Request.Builder().url(url).build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {
+                    Toast.makeText(this@CatalogActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+                if (responseData.isNullOrEmpty()) {
+                    runOnUiThread {
+                        Toast.makeText(this@CatalogActivity, "No products found for $category", Toast.LENGTH_SHORT).show()
+                    }
+                    return
+                }
+                try {
+                    val jsonResponse = JSONObject(responseData)
+                    if (!jsonResponse.optBoolean("success", false)) {
+                        runOnUiThread {
+                            Toast.makeText(this@CatalogActivity, "Failed to fetch products for $category", Toast.LENGTH_SHORT).show()
+                        }
+                        return
+                    }
+                    val productsArray = jsonResponse.optJSONArray("products") ?: return
+                    productList.clear()
+                    for (i in 0 until productsArray.length()) {
+                        val productJson = productsArray.getJSONObject(i)
+                        productList.add(
+                            CatalogItem(
+                                id = productJson.optInt("id", -1),
+                                name = productJson.optString("name", "Unnamed Product"),
+                                price = productJson.optString("price", "0.00"),
+                                description = productJson.optString("description", "No description"),
+                                quantity = productJson.optInt("quantity", 0),
+                                imageUrl = productJson.optString("image", "")
+                            )
+                        )
+                    }
+                    runOnUiThread { productsRecyclerView.adapter?.notifyDataSetChanged() }
+                } catch (e: Exception) {
                     runOnUiThread {
                         Toast.makeText(this@CatalogActivity, "Parsing error: ${e.message}", Toast.LENGTH_SHORT).show()
                     }

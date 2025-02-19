@@ -2,7 +2,6 @@ package com.example.petpal
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -21,8 +20,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.IOException
 
-class CatalogAdapter(private val context: Context, private var catalogItems: MutableList<CatalogItem>) :
-    RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
+class CatalogAdapter(
+    private val context: Context,
+    private var catalogItems: MutableList<CatalogItem>
+) : RecyclerView.Adapter<CatalogAdapter.ViewHolder>() {
 
     private val client = OkHttpClient()
 
@@ -38,7 +39,8 @@ class CatalogAdapter(private val context: Context, private var catalogItems: Mut
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_product, parent, false)
         return ViewHolder(view)
     }
 
@@ -62,7 +64,11 @@ class CatalogAdapter(private val context: Context, private var catalogItems: Mut
             holder.thumbsUpButton.setImageResource(
                 if (isThumbsUp) R.drawable.baseline_thumb_up_24 else R.drawable.thumbs_off
             )
-            Toast.makeText(context, if (isThumbsUp) "Thumbs up!" else "Thumbs removed!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                if (isThumbsUp) "Thumbs up!" else "Thumbs removed!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         // Handle favorite functionality
@@ -72,20 +78,32 @@ class CatalogAdapter(private val context: Context, private var catalogItems: Mut
             holder.favoriteButton.setImageResource(
                 if (isFavorite) R.drawable.heart_logo else R.drawable.heart_logo
             )
-            Toast.makeText(context, if (isFavorite) "Added to favorites!" else "Removed from favorites!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                if (isFavorite) "Added to favorites!" else "Removed from favorites!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
 
         // Configure Add to Cart button
         holder.addToCartButton.setOnClickListener {
-            addToCart(item, holder)
+            addToCart(item)
         }
     }
 
     override fun getItemCount(): Int = catalogItems.size
 
-    private fun addToCart(product: CatalogItem, holder: ViewHolder) {
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE)
+    /**
+     * Adds a product to cart by making a network request to add_to_cart.php
+     * Checks SharedPreferences for a valid user_id from "PetPalPrefs".
+     */
+    private fun addToCart(product: CatalogItem) {
+        // Use the same name ("PetPalPrefs") that your login activity uses.
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences("PetPalPrefs", Context.MODE_PRIVATE)
+
         val mobileUserId = sharedPreferences.getInt("user_id", -1)
+        Log.d("AddToCart", "Retrieved mobileUserId: $mobileUserId")
 
         if (mobileUserId == -1) {
             Toast.makeText(context, "❌ Please login to add to cart", Toast.LENGTH_SHORT).show()
@@ -116,7 +134,6 @@ class CatalogAdapter(private val context: Context, private var catalogItems: Mut
 
             override fun onResponse(call: Call, response: Response) {
                 val responseBody = response.body?.string()
-
                 Handler(Looper.getMainLooper()).post {
                     if (responseBody != null) {
                         val jsonResponse = JSONObject(responseBody)
@@ -125,7 +142,11 @@ class CatalogAdapter(private val context: Context, private var catalogItems: Mut
                         if (success) {
                             Toast.makeText(context, "✅ Added to Cart!", Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(context, "❌ Error: ${jsonResponse.optString("message")}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "❌ Error: ${jsonResponse.optString("message")}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

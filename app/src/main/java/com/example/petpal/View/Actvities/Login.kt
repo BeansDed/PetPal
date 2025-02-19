@@ -4,11 +4,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -17,69 +17,49 @@ import java.io.IOException
 
 class Login : AppCompatActivity() {
 
-    private lateinit var backBtn: ImageView
-    private lateinit var usernameContainer: TextInputLayout
-    private lateinit var passwordContainer: TextInputLayout
+    // Using TextInputEditText (as defined in XML)
     private lateinit var usernameInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
-    private lateinit var loginBtn: ImageView
-    private lateinit var signupSuggestion: TextView
-    private lateinit var rememberMe: CheckBox
-    private lateinit var forgotBtn: TextView
-    private lateinit var sharedPreferences: SharedPreferences
 
+    // Using ImageView for the login button, as in your XML
+    private lateinit var loginBtn: ImageView
+
+    // Using TextView for the sign-up suggestion
+    private lateinit var signupSuggestion: TextView
+
+    private lateinit var sharedPreferences: SharedPreferences
     private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         setContentView(R.layout.activity_login)
-
+        // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("PetPalPrefs", MODE_PRIVATE)
-
-        // Add debug log to check shared preferences state
-        Log.d("LoginActivity", "User ID present: ${sharedPreferences.contains("user_id")}")
 
         // Check if user is already logged in
         if (sharedPreferences.contains("user_id")) {
-            Log.d("LoginActivity", "User is already logged in, redirecting...")
+            Log.d("Login", "User is already logged in, redirecting...")
             startCatalogActivity()
             finish()
             return
         }
 
-        initializeViews()
-        setupListeners()
-    }
-
-    private fun initializeViews() {
-        backBtn = findViewById(R.id.backBtn)
-        usernameContainer = findViewById(R.id.username_container)
-        passwordContainer = findViewById(R.id.password_container)
+        // Initialize views from XML
         usernameInput = findViewById(R.id.username_input)
         passwordInput = findViewById(R.id.password_input)
         loginBtn = findViewById(R.id.loginBtn)
         signupSuggestion = findViewById(R.id.signup_suggestion)
-        rememberMe = findViewById(R.id.rememberMe)
-        forgotBtn = findViewById(R.id.forgotBtn)
 
-        forgotBtn.paintFlags = forgotBtn.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-        signupSuggestion.paintFlags = signupSuggestion.paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
-    }
-
-    private fun setupListeners() {
+        // Set up click listeners
         loginBtn.setOnClickListener {
             val username = usernameInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
 
             if (username.isEmpty() || password.isEmpty()) {
-                usernameContainer.error = "Username is required"
-                passwordContainer.error = "Password is required"
-            } else {
-                usernameContainer.error = null
-                passwordContainer.error = null
-                performLogin(username, password)
+                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+            performLogin(username, password)
         }
 
         signupSuggestion.setOnClickListener {
@@ -93,7 +73,11 @@ class Login : AppCompatActivity() {
             put("password", password)
         }
 
-        val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaType())
+        val requestBody = jsonObject
+            .toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaType())
+
+        // Replace with your actual backend login URL
         val request = Request.Builder()
             .url("http://192.168.1.12/backend/mobile_login.php")
             .post(requestBody)
@@ -101,8 +85,13 @@ class Login : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                Log.e("Login", "Login failed", e)
                 runOnUiThread {
-                    Toast.makeText(this@Login, "Login failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@Login,
+                        "Login failed: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
@@ -111,14 +100,17 @@ class Login : AppCompatActivity() {
                 val jsonResponse = JSONObject(responseData ?: "{}")
                 runOnUiThread {
                     if (jsonResponse.optBoolean("success", false)) {
+                        // Save user data in SharedPreferences
                         sharedPreferences.edit().apply {
                             putInt("user_id", jsonResponse.getInt("user_id"))
                             putString("username", jsonResponse.getString("username"))
                             apply()
                         }
                         startCatalogActivity()
+                        finish()
                     } else {
-                        Toast.makeText(this@Login, "Login failed: ${jsonResponse.optString("message")}", Toast.LENGTH_LONG).show()
+                        val message = jsonResponse.optString("message", "Login failed")
+                        Toast.makeText(this@Login, message, Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -126,8 +118,6 @@ class Login : AppCompatActivity() {
     }
 
     private fun startCatalogActivity() {
-        val intent = Intent(this, CatalogActivity::class.java)
-        startActivity(intent)
-        finish()
+        startActivity(Intent(this, CatalogActivity::class.java))
     }
 }

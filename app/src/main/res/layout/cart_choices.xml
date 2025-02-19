@@ -1,123 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:padding="8dp">
 
-    <LinearLayout
-        android:id="@+id/productImage_container"
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/cartItemImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/cat"
+        android:contentDescription="@string/design_desc"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/cartItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/cartItemImage"
+        app:layout_constraintTop_toTopOf="@id/cartItemImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp" />
+
+    <!-- Product Price -->
+    <TextView
+        android:id="@+id/cartItemPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:text="$ 50"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/cartItemName"
+        app:layout_constraintTop_toBottomOf="@id/cartItemName" />
 
-        <!-- Add to Checkout Button -->
-        <CheckBox
-            android:id="@+id/addtoCheck_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Product Image -->
-        <ImageView
-            android:id="@+id/product_image"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-            android:src="@drawable/cat"
-            android:contentDescription="@string/design_desc"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/product_info_container"
-        android:layout_width="263dp"
+    <!-- Product Quantity -->
+    <TextView
+        android:id="@+id/cartItemQuantity"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp"
-        android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/productImage_container"
-        app:layout_constraintTop_toTopOf="parent">
+        android:text="1"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cartItemName" />
 
-        <!-- Product Name -->
-        <TextView
-            android:id="@+id/product_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product Name"
-            android:textSize="17sp"
-            android:textColor="@color/black"/>
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="10dp"/>
-
-        <!-- Product Manufacturer -->
-        <TextView
-            android:id="@+id/product_manufacturer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product Manufacturer"
-            android:textSize="17sp"
-            android:textColor="@color/black"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="263dp"
+    <!-- Remove Item Button -->
+    <Button
+        android:id="@+id/removeItemButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintStart_toEndOf="@id/productImage_container"
-        app:layout_constraintTop_toBottomOf="@id/product_info_container">
+        android:text="Remove"
+        app:layout_constraintTop_toBottomOf="@id/cartItemPrice"
+        app:layout_constraintStart_toStartOf="@id/cartItemPrice" />
 
-        <!-- Product Price -->
-        <TextView
-            android:id="@+id/product_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$ 50"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
+    <!-- Increase Quantity Button -->
+    <Button
+        android:id="@+id/btnIncrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintTop_toBottomOf="@id/cartItemQuantity"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <Space
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"/>
-
-        <!-- Reduce Checkout Quantity -->
-        <ImageView
-            android:id="@+id/subtract_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/remove"
-            android:background="@drawable/add_subtract_corners"
-            android:contentDescription="@string/design_desc"/>
-
-        <Space
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"/>
-
-        <!-- Product Quantity -->
-        <TextView
-            android:id="@+id/product_quantity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textSize="25sp"
-            android:textColor="@color/black"/>
-
-        <Space
-            android:layout_width="15dp"
-            android:layout_height="wrap_content"/>
-
-        <!-- Add Checkout Quantity -->
-        <ImageView
-            android:id="@+id/add_product"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add"
-            android:background="@drawable/add_subtract_corners"
-            android:contentDescription="@string/design_desc"/>
-
-
-    </LinearLayout>
+    <!-- Decrease Quantity Button -->
+    <Button
+        android:id="@+id/btnDecrease"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        app:layout_constraintTop_toBottomOf="@id/cartItemQuantity"
+        app:layout_constraintEnd_toStartOf="@id/btnIncrease"
+        android:layout_marginEnd="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,6 @@ data class CatalogItem(
     val name: String,
     val price: String,
     val description: String,
-    val quantity: Int,
+    var quantity: Int,
     val imageUrl: String
 )
