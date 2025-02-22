@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/nav_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="176dp"
+        android:orientation="vertical"
+        android:background="@drawable/header"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/profile_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Back Button -->
+                <ImageView
+                    android:id="@+id/back_btn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/back_button"
+                    android:contentDescription="@string/design_desc"
+                    android:layout_marginStart="10dp"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"/>
+
+                <!-- User Profile -->
+                <ImageView
+                    android:id="@+id/user_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo"
+                    android:contentDescription="@string/design_desc"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="30dp"
+                android:layout_gravity="center">
+
+                <!-- Login Button -->
+                <TextView
+                    android:id="@+id/login_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_sugg_corners"/>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"/>
+
+                <!-- Sign Up Button -->
+                <TextView
+                    android:id="@+id/signup_btn"
+                    android:layout_width="90dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:padding="5dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/login_sugg_corners"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
