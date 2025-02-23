@@ -6,14 +6,14 @@
     android:layout_height="wrap_content"
     android:padding="5dp">
 
-    <!-- Add to Checkout Button -->
-  <CheckBox
-      android:id="@+id/addtoCheck_btn"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintEnd_toStartOf="@id/product_image"
-      app:layout_constraintStart_toStartOf="parent"/>
+    <!-- Checkbox -->
+    <CheckBox
+        android:id="@+id/addtoCheck_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/product_image"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- Product Image -->
     <ImageView
@@ -21,10 +21,10 @@
         android:layout_width="100dp"
         android:layout_height="120dp"
         android:src="@drawable/cat"
+        android:contentDescription="@string/design_desc"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addtoCheck_btn"
-        android:contentDescription="@string/design_desc"/>
+        app:layout_constraintStart_toEndOf="@id/addtoCheck_btn" />
 
     <LinearLayout
         android:id="@+id/product_info"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="start"
-        app:layout_constraintStart_toEndOf="@+id/product_image"
+        app:layout_constraintStart_toEndOf="@id/product_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -44,11 +44,11 @@
             android:layout_height="wrap_content"
             android:text="Product Name"
             android:textSize="17sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
 
         <!-- Product Manufacturer -->
         <TextView
@@ -57,11 +57,11 @@
             android:layout_height="wrap_content"
             android:text="Product Manufacturer"
             android:textSize="17sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -76,53 +76,48 @@
                 android:layout_height="wrap_content"
                 android:text="$ 50"
                 android:textSize="25sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <Space
                 android:layout_width="50dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
-            <!-- Reduce Checkout Quantity -->
+            <!-- Decrease Quantity -->
             <ImageView
                 android:id="@+id/subtract_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/remove"
                 android:background="@drawable/add_subtract_corners"
-                android:contentDescription="@string/design_desc"/>
+                android:contentDescription="@string/design_desc" />
 
             <Space
                 android:layout_width="15dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
-            <!-- Product Quantity -->
+            <!-- Quantity -->
             <TextView
                 android:id="@+id/product_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textSize="25sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <Space
                 android:layout_width="15dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
-            <!-- Add Checkout Quantity -->
+            <!-- Increase Quantity -->
             <ImageView
                 android:id="@+id/add_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/add"
                 android:background="@drawable/add_subtract_corners"
-                android:contentDescription="@string/design_desc"/>
+                android:contentDescription="@string/design_desc" />
 
         </LinearLayout>
-
     </LinearLayout>
-
-
-
-    
 
 </androidx.constraintlayout.widget.ConstraintLayout>

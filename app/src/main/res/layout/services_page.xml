@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scrollRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="1000dp"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- "Schedule an Appointment" heading -->
         <TextView
             android:id="@+id/scheduleAppointmentTxt"
             android:layout_width="wrap_content"
@@ -27,7 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Card for Grooming Services -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardGrooming"
             android:layout_width="0dp"
@@ -80,7 +78,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card for Veterinary Services -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardVeterinary"
             android:layout_width="0dp"

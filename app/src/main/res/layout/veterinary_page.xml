@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
+    <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
         android:elevation="4dp"
-        android:gravity="top|center"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -24,9 +26,9 @@
             android:layout_height="30dp"
             android:layout_gravity="start"
             android:layout_marginStart="30dp"
-            android:src="@drawable/menu_bar" />  <!-- Make sure this drawable exists and is visible -->
+            android:src="@drawable/menu_bar" />
 
-        <!-- Catalog Title -->
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,17 +36,7 @@
             android:text="Veterinary"
             android:textSize="25sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/alata"/>
-
-        <!--
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/searchIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/search"
-            /> -->
+            android:fontFamily="@font/alata" />
 
         <!-- Calendar Button -->
         <androidx.appcompat.widget.AppCompatImageView
@@ -56,6 +48,7 @@
             android:src="@drawable/calendar_logo" />
     </androidx.appcompat.widget.Toolbar>
 
+    <!-- Header Text -->
     <TextView
         android:id="@+id/schedule_txt"
         android:layout_width="wrap_content"
@@ -67,49 +60,64 @@
         android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- ScrollView to hold both the ListView and the Form -->
     <ScrollView
+        android:id="@+id/scrollContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="0dp"
         android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/schedule_txt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/schedule_txt">
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <ImageView
-                android:layout_width="330dp"
+            <!-- 1) ListView for Services -->
+            <ListView
+                android:id="@+id/servicesListView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/image_container"
-                android:contentDescription="@string/design_desc"
-                android:src="@drawable/cat" />
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="1dp" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="20dp" />
+
+            <!-- 2) Image (header) -->
+            <ImageView
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cat"
+                android:background="@drawable/image_container"
+                android:contentDescription="@string/design_desc" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <!-- 3) Form Fields -->
 
             <!-- Name Input -->
             <EditText
                 android:id="@+id/name_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="name"
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Enter your name"
-                android:inputType="text"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1"
+                android:autofillHints="name" />
 
             <Space
                 android:layout_width="match_parent"
@@ -120,14 +128,14 @@
                 android:id="@+id/address_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="postalAddress"
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Enter your address"
-                android:inputType="text"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1"
+                android:autofillHints="postalAddress" />
 
             <Space
                 android:layout_width="match_parent"
@@ -138,15 +146,15 @@
                 android:id="@+id/phone_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="phone"
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Enter your phone number"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray"
+                android:background="@drawable/user_input_roundedcorner"
                 android:inputType="number"
                 android:lines="1"
                 android:maxLength="11"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:autofillHints="phone" />
 
             <Space
                 android:layout_width="match_parent"
@@ -157,14 +165,14 @@
                 android:id="@+id/petName_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="name"
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Enter your pet's name"
-                android:inputType="text"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1"
+                android:autofillHints="name" />
 
             <Space
                 android:layout_width="match_parent"
@@ -175,15 +183,16 @@
                 android:id="@+id/petBreed_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="name"
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Enter your pet's breed"
-                android:inputType="text"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1"
+                android:autofillHints="name" />
 
+            <!-- Pet Type Checkboxes -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -210,26 +219,25 @@
                     android:fontFamily="@font/alata"
                     android:text="Dog"
                     android:textSize="15sp" />
-
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
 
-            <!-- Type of Groom Input -->
+            <!-- Type of Service Input -->
             <EditText
                 android:id="@+id/groomType_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints="name"
-                android:background="@drawable/user_input_roundedcorner"
-                android:hint="    Type of Groom"
-                android:inputType="text"
-                android:lines="1"
+                android:hint="    Type of Service"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1"
+                android:autofillHints="name" />
 
             <Space
                 android:layout_width="match_parent"
@@ -240,14 +248,13 @@
                 android:id="@+id/note_input"
                 android:layout_width="320dp"
                 android:layout_height="80dp"
-                android:autofillHints=""
-                android:background="@drawable/user_input_roundedcorner"
-                android:hint="    Enter your pet's breed"
-                android:inputType="text"
-                android:lines="10"
+                android:hint="    Additional notes"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="10" />
 
             <Space
                 android:layout_width="match_parent"
@@ -258,46 +265,58 @@
                 android:id="@+id/date_input"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints=""
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    MM/DD/YY"
-                android:inputType="date"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="date"
+                android:lines="1" />
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
 
-            <!-- Choose a Payment Method -->
+            <!-- Payment Method Input -->
             <EditText
                 android:id="@+id/payment_method"
                 android:layout_width="320dp"
                 android:layout_height="40dp"
-                android:autofillHints=""
-                android:background="@drawable/user_input_roundedcorner"
                 android:hint="    Choose a payment method"
-                android:inputType="date"
-                android:lines="1"
+                android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/gray"
-                android:textSize="15sp" />
+                android:background="@drawable/user_input_roundedcorner"
+                android:inputType="text"
+                android:lines="1" />
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp" />
 
             <!-- Schedule Appointment Button -->
             <ImageView
+                android:id="@+id/schedule_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/apointment_btn"
-                android:contentDescription="@string/design_desc"/>
+                android:contentDescription="@string/design_desc" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <!-- History Button -->
+            <Button
+                android:id="@+id/historyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Service History"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/alata" />
 
         </LinearLayout>
-
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

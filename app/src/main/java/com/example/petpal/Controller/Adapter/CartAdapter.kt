@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -19,16 +19,18 @@ class CartAdapter(
 ) : RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
 
     inner class CartViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val itemName: TextView = itemView.findViewById(R.id.cartItemName)
-        val itemPrice: TextView = itemView.findViewById(R.id.cartItemPrice)
-        val itemQuantity: TextView = itemView.findViewById(R.id.cartItemQuantity)
-        val itemImage: ImageView = itemView.findViewById(R.id.cartItemImage)
-        val removeButton: Button = itemView.findViewById(R.id.removeItemButton)
-        val btnIncrease: Button = itemView.findViewById(R.id.btnIncrease)
-        val btnDecrease: Button = itemView.findViewById(R.id.btnDecrease)
+        val addToCheckoutCheckBox: CheckBox = itemView.findViewById(R.id.addtoCheck_btn)
+        val productImage: ImageView = itemView.findViewById(R.id.product_image)
+        val productName: TextView = itemView.findViewById(R.id.product_name)
+        val productManufacturer: TextView = itemView.findViewById(R.id.product_manufacturer)
+        val productPrice: TextView = itemView.findViewById(R.id.product_price)
+        val subtractButton: ImageView = itemView.findViewById(R.id.subtract_btn)
+        val productQuantity: TextView = itemView.findViewById(R.id.product_quantity)
+        val addProductButton: ImageView = itemView.findViewById(R.id.add_product)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
+        // Inflate your cart_choices.xml
         val view = LayoutInflater.from(context).inflate(R.layout.cart_choices, parent, false)
         return CartViewHolder(view)
     }
@@ -36,27 +38,36 @@ class CartAdapter(
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val item = cartItems[position]
 
-        holder.itemName.text = item.name
-        holder.itemPrice.text = "₱${item.price}"
-        holder.itemQuantity.text = item.quantity.toString()
+        // Assign data to views
+        holder.productName.text = item.name
+        holder.productManufacturer.text = item.manufacturer    // uses the new field in CartItem
+        holder.productPrice.text = "$ ${item.price}"
+        holder.productQuantity.text = item.quantity.toString()
 
-        // Load product image
+        // Load image
         Glide.with(context)
             .load(item.imageUrl)
-            .into(holder.itemImage)
+            .into(holder.productImage)
 
-        // Remove item
-        holder.removeButton.setOnClickListener {
-            (context as? CartActivity)?.removeItemFromCart(item.id)
+        // Checkbox state
+        holder.addToCheckoutCheckBox.isChecked = item.isChecked
+        holder.addToCheckoutCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            if (context is CartActivity) {
+                context.onCheckoutCheckboxChanged(item.id, isChecked)
+            }
         }
+
         // Increase quantity
-        holder.btnIncrease.setOnClickListener {
-            (context as? CartActivity)?.updateCartQuantity(item.id, item.quantity + 1)
+        holder.addProductButton.setOnClickListener {
+            if (context is CartActivity) {
+                context.updateCartQuantity(item.id, item.quantity + 1)
+            }
         }
-        // Decrease quantity (don't go below 1)
-        holder.btnDecrease.setOnClickListener {
-            if (item.quantity > 1) {
-                (context as? CartActivity)?.updateCartQuantity(item.id, item.quantity - 1)
+
+        // Decrease quantity (if > 1)
+        holder.subtractButton.setOnClickListener {
+            if (item.quantity > 1 && context is CartActivity) {
+                context.updateCartQuantity(item.id, item.quantity - 1)
             }
         }
     }
