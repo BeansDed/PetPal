@@ -1,15 +1,17 @@
-package com.example.myapplication
+package com.example.petpal
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.BaseAdapter
+import android.widget.Button
+import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.petpal.Controller.Activities.ServiceAdapter
 import com.example.petpal.Controller.Activities.ServiceAvailActivity
 import com.example.petpal.Controller.Activities.ServiceHistoryActivity
 import com.example.petpal.R
-import com.example.petpal.Service
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -24,14 +26,13 @@ class GroomingActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Ensure your layout (e.g. grooming_page.xml) includes a ListView (id: servicesListView)
-        // and a Button (id: historyButton)
+        // "grooming_page" is your layout from the question
         setContentView(R.layout.grooming_page)
 
         servicesListView = findViewById(R.id.servicesListView)
         historyButton = findViewById(R.id.historyButton)
 
-        // Set up the adapter. The onAvailClick callback launches ServiceAvailActivity.
+        // Adapter: When user selects "Avail", we launch ServiceAvailActivity
         val adapter = ServiceAdapter(this, services) { service, selectedDate ->
             val intent = Intent(this, ServiceAvailActivity::class.java)
             intent.putExtra("SERVICE_ID", service.id)
@@ -40,11 +41,12 @@ class GroomingActivity : AppCompatActivity() {
         }
         servicesListView.adapter = adapter
 
+        // History button -> open ServiceHistoryActivity
         historyButton.setOnClickListener {
             startActivity(Intent(this, ServiceHistoryActivity::class.java))
         }
 
-        // Fetch only grooming services.
+        // Fetch only "grooming" services
         fetchServices("grooming")
     }
 
@@ -55,7 +57,11 @@ class GroomingActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {
-                    Toast.makeText(this@GroomingActivity, "Error fetching services", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@GroomingActivity,
+                        "Error fetching services: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -63,7 +69,11 @@ class GroomingActivity : AppCompatActivity() {
                 val responseBody = response.body?.string()
                 if (responseBody.isNullOrEmpty()) {
                     runOnUiThread {
-                        Toast.makeText(this@GroomingActivity, "No services found", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@GroomingActivity,
+                            "No services found",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     return
                 }
@@ -72,7 +82,7 @@ class GroomingActivity : AppCompatActivity() {
                     services.clear()
                     for (i in 0 until jsonArray.length()) {
                         val serviceJson = jsonArray.getJSONObject(i)
-                        // Filter for grooming services.
+                        // Filter for grooming services
                         val serviceType = serviceJson.optString("type", "").lowercase()
                         if (serviceType == typeFilter) {
                             val service = Service(
