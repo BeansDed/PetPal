@@ -79,6 +79,7 @@
 
     <!-- Bottom Design (RelativeLayout) -->
     <RelativeLayout
+        android:id="@+id/botdesign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -113,12 +114,12 @@
     <!-- Main content area in the center -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="470dp"
+        app:layout_constraintBottom_toTopOf="@+id/botdesign"
+        app:layout_constraintTop_toBottomOf="@+id/topDesign"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -397,18 +398,12 @@
                 android:layout_height="20dp" />
 
             <!-- Register Button (ImageView replaced with a Button or your custom image) -->
-            <Button
+            <ImageView
                 android:id="@+id/signin_btn"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="REGISTER"
-                android:textAllCaps="true"
-                android:fontFamily="@font/alata"
-                android:textSize="16sp"
-                android:layout_marginTop="4dp"
-                android:backgroundTint="@color/purple_500"
-                android:textColor="@android:color/white"
-                android:contentDescription="@string/button_desc" />
+                android:src="@drawable/signin_btn"
+                android:contentDescription="@string/design_desc"/>
 
             <Space
                 android:layout_width="match_parent"

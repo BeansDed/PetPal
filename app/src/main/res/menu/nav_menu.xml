@@ -22,6 +22,12 @@
             android:id="@+id/nav_likedProducts"
             android:icon="@drawable/heart_logo"
             android:title="Liked Products"/>
+
+        <item
+            android:id="@+id/nav_notif"
+            android:icon="@drawable/notif"
+            android:title="Notifications"/>
+
     </group>
     <item
         android:title="">

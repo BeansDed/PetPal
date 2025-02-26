@@ -46,7 +46,7 @@ class SignUp : AppCompatActivity() {
     private lateinit var privacyPolicy: TextView
 
     // Register Button and Login Suggestion
-    private lateinit var signupBtn: Button
+    private lateinit var signinBtn: ImageView
     private lateinit var loginSugg: TextView
 
     private val client = OkHttpClient()
@@ -87,7 +87,7 @@ class SignUp : AppCompatActivity() {
         privacyPolicy = findViewById(R.id.privacyPolicy)
 
         // Sign Up button and login suggestion
-        signupBtn = findViewById(R.id.signin_btn)
+        signinBtn = findViewById(R.id.signin_btn)
         loginSugg = findViewById(R.id.login_sugg)
 
         // Underline texts for clickable items
@@ -101,7 +101,7 @@ class SignUp : AppCompatActivity() {
             finish()
         }
 
-        signupBtn.setOnClickListener {
+        signinBtn.setOnClickListener {
             if (validateInputs()) {
                 performRegistration()
             }
