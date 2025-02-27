@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/menu_add_to_cart"
+        android:title="Add to Cart"
+        android:icon="@drawable/cart" />
 
-    <group
-        android:checkableBehavior="single">
-
-        <item
-            android:id="@+id/addToCartButton"
-            android:icon="@drawable/cart"
-            android:title="Add to Cart"/>
-
-        <item
-            android:id="@+id/buyNow_btn"
-            android:tooltipText="Buy Now"
-            android:title="Buy Now"/>
-
-    </group>
+    <item
+        android:id="@+id/menu_buy_now"
+        android:title="Buy Now"
+        android:icon="@drawable/cart" />
 
 </menu>

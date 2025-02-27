@@ -72,6 +72,8 @@
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:background="@drawable/searchactivity_roundedcorner"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -204,7 +206,7 @@
                 android:layout_height="365dp"
                 android:scrollbars="vertical" />
 
-            <!-- Fragment Container for ServiceFragment (initially hidden) -->
+            <!-- Fragment Container (optional) -->
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
@@ -212,7 +214,7 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <!-- Bottom Navigation with a WHITE background -->
+        <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
@@ -223,16 +225,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Navigation Drawer  -->
+    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:menu="@menu/nav_menu"
         android:background="@color/white"
+        app:headerLayout="@layout/nav_header"
         app:itemIconTint="@color/smth_orange"
-        app:itemTextColor="@color/smth_orange" />
+        app:itemTextColor="@color/smth_orange"
+        app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

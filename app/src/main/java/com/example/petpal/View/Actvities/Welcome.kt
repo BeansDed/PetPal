@@ -65,7 +65,7 @@ class Welcome : AppCompatActivity() {
             Log.d("WelcomeActivity", "Skip button clicked")
             try {
                 val intent = Intent(this, CatalogActivity::class.java)
-                startActivity(intent)x
+                startActivity(intent)
             } catch (e: Exception) {
                 Log.e("WelcomeActivity", "Error starting Catalog activity", e)
                 Toast.makeText(this, "Failed to start Catalog activity: ${e.message}", Toast.LENGTH_LONG).show()
