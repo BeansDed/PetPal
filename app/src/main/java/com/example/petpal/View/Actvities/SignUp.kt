@@ -3,7 +3,7 @@ package com.example.petpal
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.view.WindowManager
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
@@ -53,6 +53,10 @@ class SignUp : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // If you prefer forcing it in code, uncomment below:
+        // window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
         setContentView(R.layout.activity_sign_up)
 
         initViews()
@@ -166,6 +170,7 @@ class SignUp : AppCompatActivity() {
         // Validate password and confirm password
         val password = passwordInput.text.toString().trim()
         val confirmPassword = confirmpassInput.text.toString().trim()
+
         if (password.isEmpty()) {
             passwordContainer.error = "Password is required"
             isValid = false
@@ -175,6 +180,7 @@ class SignUp : AppCompatActivity() {
         } else {
             passwordContainer.error = null
         }
+
         if (confirmPassword.isEmpty()) {
             confirmpassContainer.error = "Confirm your password"
             isValid = false
@@ -224,27 +230,43 @@ class SignUp : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("SignUp", "Registration failed", e)
                 runOnUiThread {
-                    Toast.makeText(this@SignUp, "Registration failed: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@SignUp,
+                        "Registration failed: ${e.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 
             override fun onResponse(call: Call, response: Response) {
                 try {
                     val responseData = response.body?.string()
-                    val jsonResponse = JSONObject(responseData)
+                    val jsonResponse = JSONObject(responseData ?: "{}")
                     runOnUiThread {
                         if (jsonResponse.optBoolean("success", false)) {
-                            Toast.makeText(this@SignUp, "Registration successful! Please log in.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this@SignUp,
+                                "Registration successful! Please log in.",
+                                Toast.LENGTH_LONG
+                            ).show()
                             startActivity(Intent(this@SignUp, Login::class.java))
                             finish()
                         } else {
-                            Toast.makeText(this@SignUp, jsonResponse.optString("message", "Registration failed"), Toast.LENGTH_LONG).show()
+                            Toast.makeText(
+                                this@SignUp,
+                                jsonResponse.optString("message", "Registration failed"),
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
                 } catch (e: Exception) {
                     Log.e("SignUp", "Error processing response", e)
                     runOnUiThread {
-                        Toast.makeText(this@SignUp, "Error processing response: ${e.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@SignUp,
+                            "Error processing response: ${e.message}",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }

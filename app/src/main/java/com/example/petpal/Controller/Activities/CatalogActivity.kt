@@ -22,25 +22,18 @@ import java.io.IOException
 
 class CatalogActivity : AppCompatActivity() {
 
-    // Drawer / Navigation
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
-
-    // UI references
     private lateinit var toolbarTitle: TextView
     private lateinit var browseText: TextView
     private lateinit var recommendTxt: TextView
     private lateinit var categoryScrollView: HorizontalScrollView
     private lateinit var productsRecyclerView: RecyclerView
     private lateinit var fragmentContainer: View
-
-    // Buttons / Nav
     private lateinit var cartButton: ImageView
     private lateinit var menuIcon: ImageView
     private lateinit var searchBar: EditText
     private lateinit var bottomNavigation: BottomNavigationView
-
-    // Category Buttons
     private lateinit var categoryAll: MaterialButton
     private lateinit var categoryFood: MaterialButton
     private lateinit var categoryToys: MaterialButton
@@ -48,14 +41,13 @@ class CatalogActivity : AppCompatActivity() {
     private lateinit var categoryGrooming: MaterialButton
     private lateinit var categoryHealth: MaterialButton
 
-    // Data
     private val client = OkHttpClient()
     private val productList = mutableListOf<CatalogItem>()
     private var currentUserId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.catalog_activity)
+        setContentView(R.layout.catalog_activity)  // Assume you have a layout named catalog_activity
 
         initializeViews()
         setupNavigationDrawer()
@@ -73,7 +65,8 @@ class CatalogActivity : AppCompatActivity() {
         categoryScrollView = findViewById(R.id.categoryScrollView)
         productsRecyclerView = findViewById(R.id.productsRecyclerView)
         productsRecyclerView.layoutManager = GridLayoutManager(this, 2)
-        productsRecyclerView.adapter = CatalogAdapter(this, productList)
+        productsRecyclerView.adapter = CatalogAdapter(this, productList) // Set the adapter
+
         fragmentContainer = findViewById(R.id.fragment_container)
 
         menuIcon = findViewById(R.id.menuIcon)
@@ -89,7 +82,6 @@ class CatalogActivity : AppCompatActivity() {
         searchBar = findViewById(R.id.search_bar)
         bottomNavigation = findViewById(R.id.bottomNavigation)
 
-        // Category Buttons
         categoryAll = findViewById(R.id.categoryAll)
         categoryFood = findViewById(R.id.categoryFood)
         categoryToys = findViewById(R.id.categoryToys)
@@ -116,7 +108,7 @@ class CatalogActivity : AppCompatActivity() {
                 R.id.menu_category -> {
                     toolbarTitle.text = "Catalog"
                     showCatalogUI()
-                    fetchProducts()  // re-fetch or just show existing list
+                    fetchProducts()
                     true
                 }
                 R.id.menu_service -> {
@@ -148,7 +140,8 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun showServiceFragment() {
         supportFragmentManager.commit {
-            replace(R.id.fragment_container, ServiceFragment())
+            // Replace with your actual fragment
+            // replace(R.id.fragment_container, ServiceFragment())
         }
     }
 
@@ -174,7 +167,7 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun fetchProducts() {
         val request = Request.Builder()
-            .url("http://192.168.1.12/backend/fetch_product.php")
+            .url("http://192.168.1.12/backend/fetch_product.php") // or http://10.0.2.2 if emulator
             .build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -183,6 +176,7 @@ class CatalogActivity : AppCompatActivity() {
                     Toast.makeText(this@CatalogActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
                     runOnUiThread {
@@ -207,8 +201,13 @@ class CatalogActivity : AppCompatActivity() {
                     }
                     val productsArray = jsonResponse.optJSONArray("products") ?: return
                     productList.clear()
+
+                    val baseImageUrl = "http://192.168.1.12/backend/images/" // or 10.0.2.2
                     for (i in 0 until productsArray.length()) {
                         val productJson = productsArray.getJSONObject(i)
+                        val rawImage = productJson.optString("image", "")
+                        val fullImageUrl = if (rawImage.startsWith("http")) rawImage else baseImageUrl + rawImage
+
                         productList.add(
                             CatalogItem(
                                 id = productJson.optInt("id", -1),
@@ -216,11 +215,13 @@ class CatalogActivity : AppCompatActivity() {
                                 price = productJson.optString("price", "0.00"),
                                 description = productJson.optString("description", "No description"),
                                 quantity = productJson.optInt("quantity", 0),
-                                imageUrl = productJson.optString("image", "")
+                                imageUrl = fullImageUrl
                             )
                         )
                     }
-                    runOnUiThread { productsRecyclerView.adapter?.notifyDataSetChanged() }
+                    runOnUiThread {
+                        productsRecyclerView.adapter?.notifyDataSetChanged()
+                    }
                 } catch (e: Exception) {
                     runOnUiThread {
                         Toast.makeText(this@CatalogActivity, "Parsing error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -240,6 +241,7 @@ class CatalogActivity : AppCompatActivity() {
                     Toast.makeText(this@CatalogActivity, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body?.string()
                 if (responseData.isNullOrEmpty()) {
@@ -258,8 +260,13 @@ class CatalogActivity : AppCompatActivity() {
                     }
                     val productsArray = jsonResponse.optJSONArray("products") ?: return
                     productList.clear()
+
+                    val baseImageUrl = "http://192.168.1.12/backend/images/"
                     for (i in 0 until productsArray.length()) {
                         val productJson = productsArray.getJSONObject(i)
+                        val rawImage = productJson.optString("image", "")
+                        val fullImageUrl = if (rawImage.startsWith("http")) rawImage else baseImageUrl + rawImage
+
                         productList.add(
                             CatalogItem(
                                 id = productJson.optInt("id", -1),
@@ -267,11 +274,13 @@ class CatalogActivity : AppCompatActivity() {
                                 price = productJson.optString("price", "0.00"),
                                 description = productJson.optString("description", "No description"),
                                 quantity = productJson.optInt("quantity", 0),
-                                imageUrl = productJson.optString("image", "")
+                                imageUrl = fullImageUrl
                             )
                         )
                     }
-                    runOnUiThread { productsRecyclerView.adapter?.notifyDataSetChanged() }
+                    runOnUiThread {
+                        productsRecyclerView.adapter?.notifyDataSetChanged()
+                    }
                 } catch (e: Exception) {
                     runOnUiThread {
                         Toast.makeText(this@CatalogActivity, "Parsing error: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -283,9 +292,9 @@ class CatalogActivity : AppCompatActivity() {
 
     private fun logout() {
         getSharedPreferences("PetPalPrefs", MODE_PRIVATE).edit().clear().apply()
-        val intent = Intent(this, Login::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        // Navigate to your Login activity, e.g.:
+        // val intent = Intent(this, Login::class.java)
+        // startActivity(intent)
         finish()
     }
 }

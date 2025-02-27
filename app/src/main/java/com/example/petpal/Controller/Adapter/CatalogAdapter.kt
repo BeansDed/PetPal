@@ -27,7 +27,6 @@ class CatalogAdapter(
 
     private val client = OkHttpClient()
 
-    // ViewHolder class
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.productImage)
         val productName: TextView = itemView.findViewById(R.id.productName)
@@ -39,25 +38,24 @@ class CatalogAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_product, parent, false)
+        // This layout is where we define the item UI. For example, item_product.xml
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = catalogItems[position]
 
-        // Load product image using Glide
+        // Use Glide to load the product image
         Glide.with(context)
             .load(item.imageUrl)
             .into(holder.productImage)
 
-        // Set product details
         holder.productName.text = item.name
         holder.productDescription.text = item.description
         holder.productPrice.text = "₱${item.price}"
 
-        // Handle thumbs up functionality
+        // Example thumbs up logic
         var isThumbsUp = false
         holder.thumbsUpButton.setOnClickListener {
             isThumbsUp = !isThumbsUp
@@ -71,7 +69,7 @@ class CatalogAdapter(
             ).show()
         }
 
-        // Handle favorite functionality
+        // Example favorite logic
         var isFavorite = false
         holder.favoriteButton.setOnClickListener {
             isFavorite = !isFavorite
@@ -85,7 +83,7 @@ class CatalogAdapter(
             ).show()
         }
 
-        // Configure Add to Cart button
+        // Add to cart button logic
         holder.addToCartButton.setOnClickListener {
             addToCart(item)
         }
@@ -93,17 +91,11 @@ class CatalogAdapter(
 
     override fun getItemCount(): Int = catalogItems.size
 
-    /**
-     * Adds a product to cart by making a network request to add_to_cart.php
-     * Checks SharedPreferences for a valid user_id from "PetPalPrefs".
-     */
     private fun addToCart(product: CatalogItem) {
-        // Use the same name ("PetPalPrefs") that your login activity uses.
+        // Example cart addition
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences("PetPalPrefs", Context.MODE_PRIVATE)
-
         val mobileUserId = sharedPreferences.getInt("user_id", -1)
-        Log.d("AddToCart", "Retrieved mobileUserId: $mobileUserId")
 
         if (mobileUserId == -1) {
             Toast.makeText(context, "❌ Please login to add to cart", Toast.LENGTH_SHORT).show()
@@ -138,7 +130,6 @@ class CatalogAdapter(
                     if (responseBody != null) {
                         val jsonResponse = JSONObject(responseBody)
                         val success = jsonResponse.optBoolean("success", false)
-
                         if (success) {
                             Toast.makeText(context, "✅ Added to Cart!", Toast.LENGTH_SHORT).show()
                         } else {
@@ -154,7 +145,6 @@ class CatalogAdapter(
         })
     }
 
-    // Method to update the product list
     fun updateProducts(newProducts: List<CatalogItem>) {
         catalogItems.clear()
         catalogItems.addAll(newProducts)

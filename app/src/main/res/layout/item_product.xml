@@ -48,9 +48,10 @@
             android:layout_height="120dp"
             android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
+            android:src="@drawable/cat"
             app:layout_constraintTop_toBottomOf="@id/thumbsUpButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Product Name -->
         <TextView
@@ -66,7 +67,7 @@
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/productImage"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Product Description -->
         <TextView
@@ -81,7 +82,7 @@
             android:ellipsize="end"
             app:layout_constraintTop_toBottomOf="@id/productName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Product Price -->
         <TextView
@@ -95,7 +96,7 @@
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/productDescription"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Divider Line -->
         <View
@@ -106,7 +107,7 @@
             android:background="@color/gray"
             app:layout_constraintTop_toBottomOf="@id/productPrice"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Add to Cart Button -->
         <ImageButton
@@ -121,7 +122,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/white"/>
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

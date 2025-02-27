@@ -1,101 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Login">
 
-    <!-- Top Design -->
+    <!-- ================== TOP DESIGN ================== -->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:src="@drawable/topdesign1"
             android:contentDescription="@string/design_desc"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/topcat"
             android:layout_marginTop="17dp"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/design_desc"
-            />
+            android:src="@drawable/topcat"
+            android:contentDescription="@string/design_desc"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="175dp"
-            android:src="@drawable/topdesign2"
             android:layout_marginBottom="20dp"
             android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/topdesign2"
             android:contentDescription="@string/design_desc"/>
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginStart="30dp"
             android:layout_alignParentStart="true"
             android:src="@drawable/back_button"
             android:contentDescription="@string/design_desc"/>
-
     </RelativeLayout>
 
-    <!-- Bottom Design -->
+    <!-- ================== BOTTOM DESIGN ================== -->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="205dp"
+            android:scaleType="fitXY"
             android:src="@drawable/botdesign1"
             android:contentDescription="@string/design_desc"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/botcat"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="8dp"
-            android:contentDescription="@string/design_desc"/>
-
-        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="183dp"
+            android:layout_height="180dp"
             android:layout_marginTop="22dp"
+            android:scaleType="fitXY"
             android:src="@drawable/botdesign2"
             android:contentDescription="@string/design_desc"/>
-
     </RelativeLayout>
 
+    <!-- ================== MAIN CONTENT (CENTER) ================== -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Login Title -->
+        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,12 +106,11 @@
             android:textSize="15sp"
             android:textColor="@color/black"/>
 
-
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
 
-        <!-- Username Container -->
+        <!-- Username -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/username_container"
             android:layout_width="300dp"
@@ -125,7 +118,6 @@
             app:helperText=""
             app:helperTextTextColor="@color/red">
 
-            <!-- Username Input -->
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/username_input"
                 android:layout_width="300dp"
@@ -145,37 +137,41 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
 
-        <!-- Password Container -->
+        <!-- Password with built-in toggle icon -->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_container"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             app:helperText=""
-            app:helperTextTextColor="@color/red">
+            app:helperTextTextColor="@color/red"
 
-            <!-- Password Input -->
+            app:endIconMode="password_toggle"
+            app:endIconDrawable="@drawable/show_password"
+            app:endIconTint="@null"
+            >
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/password_input"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/user_input_roundedcorner"
-                android:hint="   Password"
                 android:fontFamily="@font/alata"
-                android:textSize="18sp"
+                android:hint="   Password"
+                android:inputType="textPassword"
                 android:lines="1"
                 android:maxLength="16"
-                android:inputType="text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textColor="@color/black"/>
+                android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <!-- Remember Me + Forgot Password -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- Remember Me CheckBox -->
             <CheckBox
                 android:id="@+id/rememberMe"
                 android:layout_width="wrap_content"
@@ -184,12 +180,10 @@
                 android:textSize="15sp"
                 android:fontFamily="@font/alata"/>
 
-
             <Space
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"/>
 
-            <!-- Forgot Password TextButton -->
             <TextView
                 android:id="@+id/forgotBtn"
                 android:layout_width="wrap_content"
@@ -212,14 +206,13 @@
             android:src="@drawable/login"
             android:contentDescription="@string/button_desc"/>
 
+        <!-- Sign Up Suggestion -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
-
-            <!-- Sign Up Suggestion -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,9 +232,7 @@
                 android:text="Sign Up"
                 android:textSize="15sp"
                 android:fontFamily="@font/alata"
-                android:textColor="@color/smth_orange"
-                />
-
+                android:textColor="@color/smth_orange"/>
         </LinearLayout>
 
     </LinearLayout>

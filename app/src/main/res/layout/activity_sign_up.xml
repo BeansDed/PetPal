@@ -1,448 +1,370 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<!-- Root LinearLayout instead of ScrollView -->
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SignUp">
 
-    <!-- IDs
-
-        @backBtn
-        @username_container
-        @username_input
-        @email_container
-        @email_input
-        @location_container
-        @location_input
-        @age_container
-        @age_input
-        @contact_container
-        @contact_input
-        @password_container
-        @password_input
-        @confirmpass_container
-        @confirmpass_input
-        @acceptTerms
-        @terms
-        @privacyPolicy
-        @signin_btn
-        @login_sugg
-
-    -->
-
-    <!-- Top Design (RelativeLayout) -->
+    <!-- ===================== TOP DESIGN ===================== -->
     <RelativeLayout
         android:id="@+id/topDesign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="top|center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="top|center">
 
+        <!-- Main top background design (wave) -->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleType="fitXY"
             android:src="@drawable/topdesign1"
-            android:contentDescription="@string/design_desc"
-            android:layout_alignParentTop="true" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="17dp"
-            android:src="@drawable/topcat"
             android:contentDescription="@string/design_desc" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="175dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/topdesign2"
-            android:contentDescription="@string/design_desc" />
-
+        <!-- Back Button -->
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:src="@drawable/back_button"
             android:contentDescription="@string/back_buttonDesc" />
-
     </RelativeLayout>
 
-    <!-- Bottom Design (RelativeLayout) -->
-    <RelativeLayout
-        android:id="@+id/botdesign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="205dp"
-            android:src="@drawable/botdesign1"
-            android:contentDescription="@string/design_desc" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="8dp"
-            android:layout_alignParentStart="true"
-            android:src="@drawable/botcat"
-            android:contentDescription="@string/design_desc" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="183dp"
-            android:layout_marginTop="22dp"
-            android:src="@drawable/botdesign2"
-            android:contentDescription="@string/design_desc" />
-
-    </RelativeLayout>
-
-    <!-- Main content area in the center -->
-    <ScrollView
+    <!-- ===================== FORM CONTENT ===================== -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="470dp"
-        app:layout_constraintBottom_toTopOf="@+id/botdesign"
-        app:layout_constraintTop_toBottomOf="@+id/topDesign"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kumar_one"
+            android:text="@string/register"
+            android:textColor="@color/smth_orange"
+            android:textSize="35sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kumar_one"
+            android:text="@string/create_Txt"
+            android:textColor="@color/smth_black"
+            android:textSize="15sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <!-- =============== ROW 1: USERNAME | EMAIL =============== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:orientation="horizontal">
 
-            <!-- Title View -->
-            <TextView
+            <!-- Username Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/username_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/username_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Username"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- =============== ROW 2: PASSWORD | CONFIRM PASSWORD =============== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Password Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Password"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Confirm Password Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/confirmpass_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/confirmpass_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Confirm Password"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- =============== ROW 3: LOCATION | AGE | CONTACT NUMBER =============== -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- LOCATION Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/location_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/location_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- AGE Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/age_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/age_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CONTACT NUMBER Container -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contact_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                app:helperText=""
+                app:helperTextTextColor="@color/red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contact_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/user_input_roundedcorner"
+                    android:fontFamily="@font/alata"
+                    android:hint="Contact Number"
+                    android:inputType="phone"
+                    android:maxLength="15"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- Terms and Conditions CheckBox -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/acceptTerms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kumar_one"
-                android:text="@string/register"
+                android:fontFamily="@font/alata"
+                android:text="I accept "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="Terms and Conditions "
                 android:textColor="@color/smth_orange"
-                android:textSize="35sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/kumar_one"
-                android:text="@string/create_Txt"
+                android:fontFamily="@font/alata"
+                android:text="and "
                 android:textColor="@color/smth_black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/privacyPolicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="Privacy Policy"
+                android:textColor="@color/smth_orange"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <!-- Register Button -->
+        <ImageView
+            android:id="@+id/signin_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/design_desc"
+            android:src="@drawable/signin_btn" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <!-- Login Suggestion -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alata"
+                android:text="@string/login_suggestion"
+                android:textColor="@color/black"
                 android:textSize="15sp" />
 
             <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
+                android:layout_width="5dp"
+                android:layout_height="wrap_content" />
 
-            <!-- =============== ROW 1: USERNAME | EMAIL =============== -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Username Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/username_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/username_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Username"
-                        android:inputType="text"
-                        android:maxLength="20"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Email Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/email_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:maxLength="50"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <!-- =============== ROW 2: PASSWORD | CONFIRM PASSWORD =============== -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Password Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/password_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/password_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:maxLength="16"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- Confirm Password Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/confirmpass_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/confirmpass_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Confirm Password"
-                        android:inputType="textPassword"
-                        android:maxLength="16"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <!-- =============== ROW 3: LOCATION | AGE | CONTACT NUMBER =============== -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- LOCATION Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/location_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="4dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/location_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Location"
-                        android:inputType="text"
-                        android:maxLength="50"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- AGE Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/age_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/age_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Age"
-                        android:inputType="number"
-                        android:maxLength="3"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- CONTACT NUMBER Container -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/contact_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="4dp"
-                    app:helperText=""
-                    app:helperTextTextColor="@color/red">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/contact_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/user_input_roundedcorner"
-                        android:fontFamily="@font/alata"
-                        android:hint="Contact Number"
-                        android:inputType="phone"
-                        android:maxLength="15"
-                        android:textColor="@color/black"
-                        android:textColorHint="@color/black"
-                        android:textSize="18sp" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <!-- Terms and Conditions CheckBox -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/login_sugg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
-
-                <CheckBox
-                    android:id="@+id/acceptTerms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="I accept "
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/terms"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="Terms and Conditions "
-                    android:textColor="@color/smth_orange"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="and "
-                    android:textColor="@color/smth_black"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/privacyPolicy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="Privacy Policy"
-                    android:textColor="@color/smth_orange"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <!-- Register Button (ImageView replaced with a Button or your custom image) -->
-            <ImageView
-                android:id="@+id/signin_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/signin_btn"
-                android:contentDescription="@string/design_desc"/>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
-            <!-- Login Suggestion -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="@string/login_suggestion"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/login_sugg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/alata"
-                    android:text="Log In"
-                    android:textColor="@color/smth_orange"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
-
+                android:fontFamily="@font/alata"
+                android:text="Log In"
+                android:textColor="@color/smth_orange"
+                android:textSize="15sp" />
         </LinearLayout>
-    </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <!-- Bottom Design (optional) -->
+    <RelativeLayout
+        android:id="@+id/botdesign"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center" />
+
+</LinearLayout>

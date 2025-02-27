@@ -6,108 +6,107 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <!-- Top Container (Cart Header) -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top_container"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:background="@drawable/page_design"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
             android:id="@+id/backBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:src="@drawable/back_button"
             android:contentDescription="@string/design_desc"
-            android:layout_gravity="center_vertical"/>
-
-        <Space
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/cartTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Shopping Cart"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/alata"/>
-
-        <Space
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"/>
+            android:fontFamily="@font/alata"
+            app:layout_constraintStart_toEndOf="@id/backBtn"
+            app:layout_constraintEnd_toStartOf="@id/edit_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" />
 
         <ImageView
             android:id="@+id/edit_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
             android:src="@drawable/edit_icon"
-            android:contentDescription="@string/design_desc"/>
-    </LinearLayout>
+            android:contentDescription="@string/design_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Cart Items List (RecyclerView) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cartRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@id/top_container"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_container"
+        app:layout_constraintBottom_toTopOf="@id/bottom_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/cartRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="567dp"
-            android:padding="10dp" />
-    </LinearLayout>
-
-    <!-- Bottom Container (Cart Summary and Checkout) -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottom_container"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="80dp"
-        android:gravity="end|center_vertical"
         android:background="@color/light_orange"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/priceSymbol"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$ "
             android:textSize="30sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/alata"/>
+            android:fontFamily="@font/alata"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
+            android:id="@+id/tvTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="50"
             android:textSize="30sp"
             android:textColor="@color/black"
-            android:fontFamily="@font/alata"/>
-
-        <Space
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"/>
+            android:fontFamily="@font/alata"
+            app:layout_constraintStart_toEndOf="@id/priceSymbol"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="4dp" />
 
         <ImageView
             android:id="@+id/checkoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/checkout"
-            android:contentDescription="@string/design_desc"/>
-
-        <Space
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:contentDescription="@string/design_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

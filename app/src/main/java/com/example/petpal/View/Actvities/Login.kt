@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -17,26 +18,22 @@ import java.io.IOException
 
 class Login : AppCompatActivity() {
 
-    // Using TextInputEditText (as defined in XML)
     private lateinit var usernameInput: TextInputEditText
     private lateinit var passwordInput: TextInputEditText
-
-    // Using ImageView for the login button, as in your XML
     private lateinit var loginBtn: ImageView
-
-    // Using TextView for the sign-up suggestion
     private lateinit var signupSuggestion: TextView
-
+    private lateinit var rememberMe: CheckBox
     private lateinit var sharedPreferences: SharedPreferences
     private val client = OkHttpClient()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("PetPalPrefs", MODE_PRIVATE)
 
-        // Check if user is already logged in
+        // Auto-login if user is already logged in
         if (sharedPreferences.contains("user_id")) {
             Log.d("Login", "User is already logged in, redirecting...")
             startCatalogActivity()
@@ -44,13 +41,30 @@ class Login : AppCompatActivity() {
             return
         }
 
-        // Initialize views from XML
+        // Initialize views
         usernameInput = findViewById(R.id.username_input)
         passwordInput = findViewById(R.id.password_input)
         loginBtn = findViewById(R.id.loginBtn)
         signupSuggestion = findViewById(R.id.signup_suggestion)
+        rememberMe = findViewById(R.id.rememberMe)
+        val backBtn: ImageView = findViewById(R.id.backBtn)
 
-        // Set up click listeners
+        // Set back button to navigate to WelcomeActivity (activity_welcome.xml)
+        backBtn.setOnClickListener {
+            startActivity(Intent(this, Welcome::class.java))
+            finish()
+        }
+
+        // Populate credentials if they were remembered
+        val rememberedUsername = sharedPreferences.getString("remembered_username", "")
+        val rememberedPassword = sharedPreferences.getString("remembered_password", "")
+        if (!rememberedUsername.isNullOrEmpty() && !rememberedPassword.isNullOrEmpty()) {
+            usernameInput.setText(rememberedUsername)
+            passwordInput.setText(rememberedPassword)
+            rememberMe.isChecked = true
+        }
+
+        // Login button click listener
         loginBtn.setOnClickListener {
             val username = usernameInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
@@ -62,6 +76,7 @@ class Login : AppCompatActivity() {
             performLogin(username, password)
         }
 
+        // Navigate to SignUp activity on suggestion click
         signupSuggestion.setOnClickListener {
             startActivity(Intent(this, SignUp::class.java))
         }
@@ -87,11 +102,7 @@ class Login : AppCompatActivity() {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("Login", "Login failed", e)
                 runOnUiThread {
-                    Toast.makeText(
-                        this@Login,
-                        "Login failed: ${e.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@Login, "Login failed: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -100,11 +111,23 @@ class Login : AppCompatActivity() {
                 val jsonResponse = JSONObject(responseData ?: "{}")
                 runOnUiThread {
                     if (jsonResponse.optBoolean("success", false)) {
-                        // Save user data in SharedPreferences
+                        // Save basic user data in SharedPreferences
                         sharedPreferences.edit().apply {
                             putInt("user_id", jsonResponse.getInt("user_id"))
                             putString("username", jsonResponse.getString("username"))
                             apply()
+                        }
+                        // Remember credentials if checkbox is checked
+                        if (rememberMe.isChecked) {
+                            sharedPreferences.edit().apply {
+                                putString("remembered_username", username)
+                                putString("remembered_password", password)
+                                apply()
+                            }
+                        } else {
+                            sharedPreferences.edit().remove("remembered_username")
+                                .remove("remembered_password")
+                                .apply()
                         }
                         startCatalogActivity()
                         finish()
