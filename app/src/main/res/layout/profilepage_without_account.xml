@@ -91,8 +91,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Activity"
-                android:textSize="25sp"
+                android:text="Profile"
+                android:textSize="23sp"
                 android:fontFamily="@font/alata"
                 android:textColor="@color/black"
                 android:layout_gravity="start"/>
@@ -101,6 +101,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"/>
 
+            <!-- Profile Details -->
+            <TextView
+                android:id="@+id/profile_details"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/add_subtract_corners"
+                android:text="   Profile Details"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:paddingStart="13dp"
+                android:paddingEnd="10dp"
+                app:drawableStartCompat="@drawable/profile_icon" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Activity"
+                android:textSize="23sp"
+                android:fontFamily="@font/alata"
+                android:textColor="@color/black"
+                android:layout_gravity="start"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"/>
+
             <!-- Liked Products -->
             <TextView
                 android:id="@+id/liked_products"
@@ -108,7 +139,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/add_subtract_corners"
                 android:text="   My Liked Products"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:paddingStart="10dp"
@@ -126,7 +157,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/add_subtract_corners"
                 android:text="   Ordered Products"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:paddingStart="10dp"
@@ -144,7 +175,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/add_subtract_corners"
                 android:text="   Scheduled Grooming Services"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:paddingStart="10dp"
@@ -155,7 +186,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="15dp"/>
 
-
             <!-- Scheduled Vet Services -->
             <TextView
                 android:id="@+id/scvet_services"
@@ -163,7 +193,7 @@
                 android:layout_height="50dp"
                 android:background="@drawable/add_subtract_corners"
                 android:text="   Scheduled Veterinary Services"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center_vertical"
                 android:textColor="@color/black"
                 android:paddingStart="10dp"
@@ -174,6 +204,54 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Info &amp; Support"
+                android:textSize="23sp"
+                android:fontFamily="@font/alata"
+                android:textColor="@color/black"
+                android:layout_gravity="start"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20sp"/>
+
+            <!-- Help -->
+            <TextView
+                android:id="@+id/help"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/add_subtract_corners"
+                android:text="    Help"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:drawableStartCompat="@drawable/help" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
+
+            <!-- About -->
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/add_subtract_corners"
+                android:text="   About"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:drawableStartCompat="@drawable/info" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
 
         </LinearLayout>
 
